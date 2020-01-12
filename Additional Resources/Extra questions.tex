@@ -1,0 +1,799 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{centernot}
+
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+%\renewcommand{\span}{\operatorname{span}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{Extra Questions for MA 106}
+\author{Aryaman Maithani}%\\
+%\small TA for D1-T5}
+\date{Semester: Spring 2020\\ Latest update: \today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\hrulefill
+\setcounter{section}{-1}
+\section{Notation}
+
+$\mathbb{N} = \{1,\; 2,\; \ldots\}$ denotes the set of natural numbers.\\
+$\mathbb{Z} = \mathbb{N} \cup \{0\} \cup \{-n : n\in\mathbb{N}\}$ denotes the set of integers.\\
+$\mathbb{Q}$ denotes the set of rational numbers.\\
+$\mathbb{R}$ denotes the set of real numbers.\\
+The existence of all the above sets will be assumed.\\
+$M_n(\mathbb{R})$ denotes the set of all $n\times n$ matrices with real entries.\\
+$M_n(\mathbb{C})$ denotes the set of all $n\times n$ matrices with complex entries.\\
+$M_n(\mathbb{F})$ denotes the set of all $n\times n$ matrices with entries from an arbitrary field $F.$ If you're not familiar with fields, you may assume $\mathbb{F} = \mathbb{R}$ or $\mathbb{C}.$\\
+Whenever either of the above three sets is written, it will be assumed that $n \in \mathbb{N}.$\\~\\
+$A \subset B$ will be written to denote that $A$ is a(n improper) subset of $B.$ In particular, $\{1\} \subset \{1\}$ is a true statement. So is $\{1\} \subset \{1, 2\}.$\\
+$A \subsetneq B$ will be written to denote that $A$ is a proper subset of $B.$ In particular, $\{1\} \subsetneq \{1\}$ is not a true statement. However, $\{1\} \subsetneq \{1, 2\}$ is.\\
+$\mathcal{N}(A)$ denotes the null-space of the matrix $A.$\\
+If $f:X\to Y$ is a function and $S \subset X,$ we define $f(S) := \{y \in Y : \exists s \in S(f(s) = y)\} = \{f(s) : s \in S\}.$
+
+\hrulefill
+
+\section{Standard}
+\begin{enumerate} 
+	\item Let $V$ and $W$ be vector spaces over a field $\mathbb{F}.$\\
+	Show that if $T:V\rightarrow W$ is a linear transformation, then $T$ is one-one if and only if $\mathcal{N}(T) = \{0\}$.
+	%
+	\item Suppose $A$ is an $m \times n$ matrix and $b$ is an $m\times 1$ column matrix.\\
+	Let $x_0 \in \mathbb{R}^n$ be a particular $n \times 1$ matrix such that $Ax_0 = b.$\\
+	Let $S = \{x \in \mathbb{R}^n : Ax = b\},$ that is the set of all solutions to the equation $Ax = b.$\\
+	Show that $S = x_0 + \mathcal{N}(A).$\\~\\
+	Notation: $x_0 + \mathcal{N}(A) = \{x_0 + x : x \in \mathcal{N}(A)\}.$
+	%
+	\item Let $U$ be a subspace of a finite dimensional vector space $V.$\\
+	Show that $\dim U \le \dim V.$
+	%
+	\item Show that $\mathbb{R}$ and $\mathbb{C}$ are vector spaces over $\mathbb{R}$ when the addition and scalar multiplication have their usual definitions.\\
+	What is the dimension of each?
+	%
+	\item Show that $\mathbb{C}^n$ is a vector space over $\mathbb{C}$ as well as $\mathbb{R}$ for each $n \in \mathbb{N}.$ (The addition and multiplication are to be taken as the standard ones.)\\
+	What is the dimension in each case?
+	%
+	\item Show that $\mathbb{R}$ is a vector space over $\mathbb{Q}$ when the addition and scalar multiplication have their usual definitions.\\
+	Show that no finite subset of $\mathbb{R}$ can be a basis of this vector space.
+	%
+	\item Let $A$ be a $7 \times 3$ matrix and $B$ be a $9 \times 4$ matrix.\\
+	Show that there exists a $3 \times 9$ matrix $X \neq O$ such that $AXB = O.$
+	%
+	\item A subset $S$ of $\mathbb{R}^n$ $(n \in \mathbb{N})$ is said to be \emph{convex} if the following is true:
+	\[\forall \mathbf{x}, \mathbf{y} \in S \quad \forall t \in [0, 1]: t\mathbf{x} + (1 - t)\mathbf{y} \in S\]
+	Let $T:\mathbb{R}^n \to \mathbb{R}^m$ be a linear map and let $S \subset \mathbb{R}^n$ be convex. Show that $T(S) \subset \mathbb{R}^m$ is also convex.\\
+	Note $T(S) := \{\mathbf{y} \in \mathbb{R}^m : \mathbf{y} = T(\mathbf{x}) \text{ for some } \mathbf{x} \in S\} = \{T(\mathbf{x}) : \mathbf{x} \in S\}.$
+	%
+	\item Let $A$ be an $m\times n$ real matrix and let $B$ be an $n\times p$ real matrix.\\
+	Show that $\rank AB \le \rank A.$ Hence or otherwise, show that $\rank AB \le \rank B.$\\
+	Give examples to show that each of these equalities may or may not be achieved.
+	%
+	\item Let $A$ be an $m\times n$ real matrix and let $B$ be an $n\times m$ real matrix.\\
+	Show that it is not necessary that $\rank AB = \rank BA.$
+	%
+	\item Let $A, B \in M_n(\mathbb{F}).$ Show that $\operatorname{trace}(AB) = \operatorname{trace}(BA).$
+	%
+	\item Let $A, B \in M_n(\mathbb{F})$ with $B$ invertible. Show that $\rank AB = \rank A = \rank BA.$
+	%
+\end{enumerate}
+
+\section{Algebra}
+\begin{enumerate} 
+	\item Let $GL_n(\mathbb{R}) = \{M \in M_n(\mathbb{R}) : \det M \neq 0\},$ the subset of invertible matrices of $M_n(\mathbb{R}).$\\
+	Show the following:
+	\begin{enumerate}[nosep] 
+		\item For every $A, B, C \in GL_n(\mathbb{R}),$ the following is true: $A(BC) = (AB)C.$ 
+		\item $\exists E \in GL_n(\mathbb{R})$ such that $AE = EA = A$ for all $A \in GL_n(\mathbb{R}).$
+		\item For every $A \in GL_n(\mathbb{R}),$ there exists $B \in GL_n(\mathbb{R})$ such that $AB = BA = E.$
+	\end{enumerate}
+	(Yes, these questions are easier than they may look at first glance.)
+	%
+	\item Let $E \in M_n(\mathbb{R})$ be such that $EA = AE$ for all $A \in M_n(\mathbb{R}).$ Show that $E = I_n.$\\
+	(That is, there is a unique identity.)
+	%
+	\item Find all $C \in M_2(\mathbb{R})$ such that $MC = CM$ for all $M \in M_2(\mathbb{R}).$\\
+	(That is, find all matrices that commute with every other matrix.)
+	%
+	\item Let $S$ be a set and let $\cdot:S\times S\to S$ be a function.\\
+	For the sake of efficient notation, let us write $a\cdot b$ to denote $\cdot(a, b).$\\
+	Suppose that $\cdot$ is associative. That is, $(a\cdot b)\cdot c = a\cdot(b\cdot c)$ for all $a, b, c \in S.$\\
+	An element $e \in S$ is said to be an identity if $a\cdot e = e \cdot a = a$ for each $a \in S.$ (Note that two elements need not commute in general.)
+	\begin{enumerate}[nosep] 
+		\item Show that if an identity exists, then it must be unique.
+		\item Suppose such an identity $e$ exists.\\
+		Let $a, b, c \in S$ be such that $a \cdot b = c \cdot a = e.$\\
+		The element $b$ is called a right inverse of $a$ and the element $c$ is called a left inverse of $a.$
+		Show that $b = c.$
+		\item Conclude that if an element has both a right and left inverse, then they must unique (and same).
+		\item Give an example of $S$ and $\cdot$ to show that existence of a right inverse does not imply the existence of a left inverse.
+		\item Give an example to show that an element may have infinitely many distinct left inverses.\\
+		(Note that in this case, a right inverse cannot exist.)
+	\end{enumerate}
+	%
+	\item Let $A, B \in M_n(\mathbb{R}).$ Note that matrix multiplication is associative and there does exist an identity for this. \\
+	Using the above exercise, it would be easy to conclude that if $AB = I,$ then $BA = I.$ However, we are still left to show that $A$ actually does have a left inverse.\\
+	(The above exercise shows that it is not true for general operations.)\\~\\
+	Using the interpretation of matrices representing linear transforms, show that this is indeed true.\\
+	(Note that there do exist linear transforms between infinite dimensional spaces that have only a one-sided inverse, so this exercise may not be as trivial after all.)
+	%
+	\item A matrix $A \in M_n(\mathbb{F})$ is said to be nilpotent if there exists $m \in \mathbb{N}$ such that $A^m = O.$
+	\begin{enumerate} 
+		\item Show that if $N$ is nilpotent, then $\det(N) = 0.$
+		\item Show that $\det(N) = 0 \centernot\implies N$ is nilpotent.
+		\item Show that if $N$ and $M$ are nilpotent, then so is $N+M.$
+		\item Show that if $A$ is invertible and $N$ is nilpotent, then $A - N$ is invertible.\\
+		(Hint: Considering the case that $N^2 = O$ may give an idea for the general case.)
+		\item Show that if $N$ is nilpotent, then the only eigenvalue of $N$ is $0.$
+		\item Show that if $N$ is nilpotent, then $N^n = O.$ (Note that $n$ is the size of this matrix.)
+	\end{enumerate}
+	%
+	\item Let $V$ be a vector space. Let $U$ and $W$ be subspaces of $V.$
+	\begin{enumerate}[nosep] 
+		\item Show that $U \cap W$ is a subspace of $V.$
+		\item Show that $U \cup W$ need not be a subspace of $V.$
+		\item Show that if $U \cup W$ is a subspace of $V,$ then $U \subset W$ or $W \subset U$ (or both). 
+	\end{enumerate}
+	%
+	\item Let $V$ be a vector space. Let $U$ and $W$ be subspaces of $V.$\\
+	Define $U + W := \{v \in V : v = u + w \text{ for some } u \in U,\; w\in W\}.$\\
+	Show that $U + W$ is a subspace of $V.$
+	%
+	\item Let $V$ be a vector space. Let $U$ and $W$ be subspaces of $V.$\\
+	As we saw earlier, it is not necessary that $U \cup W$ is a subspace of $V.$\\
+	Show that
+	\begin{enumerate}[nosep] 
+		\item $U+W$ contains $U \cup W.$\\
+		(Note that we have already shown that $U+W$ is a subspace.)
+		\item If $X$ is a subspace containing $U \cup W,$ then $X$ contains $U + W.$
+	\end{enumerate}
+	The above results show that $U + W$ is the ``smallest'' subspace containing $U \cup W.$
+\end{enumerate}
+
+\section{Linear independence and spanning}
+\begin{enumerate}
+	\item Let $n \in \mathbb{N}\setminus\{1\}.$\\
+	Let $u$ and $v$ be non-zero vectors in $\mathbb{R}^n$ such that $Au = u$ and $Av = -v.$\\
+	Prove that $u$ and $v$ are linearly independent.
+	%
+	\item Let $\{v_1,v_2\}$ be a linearly independent subset of a vector space $V$ and let $w\in V$ be such that $w \notin\operatorname{span}\{v_1,v_2\}$. \\
+	Show that $\{v_1 + w, v_2 + w\}$ is linearly independent.
+	%
+	\item Give an example of three vectors $x, y, z$ such that $\{x, y, z\}$ is not linearly independent but the sets formed by taking two of them at a time are.
+	%
+	\item Let $V$ be a vector space over $\mathbb{F}.$\\
+	Let $B \subset V$ be such that every $v \in V$ can be written as a linear combination of elements of $B$ in a unique way.\\
+	Show that $B$ is a basis for $V.$
+	% 
+	\item Let $V$ and $W$ be vector spaces over some field $\mathbb{F}.$\\
+	Let $S$ be a (finite) linearly independent subset of $W$ and let $T:V\to W$ be a linear map.\\
+	Show that if $T$ is injective (one-to-one), then $T(S)$ is a linearly independent subset of $W.$
+	%
+	\item Let $V$ and $W$ be vector spaces over some field $\mathbb{F}.$\\
+	Let $S$ be a (finite) spanning subset of $W$ and let $T:V\to W$ be a linear map.\\
+	Show that if $T$ is surjective (onto), then $T(S)$ is a spanning subset of $W.$
+	%
+	\item Let $V$ be a vector space and let $S \subset V.$ Show that if $W$ is a subspace of $V$ containing $S$, then $W$ contains $\operatorname{span} S.$
+	%
+	\item Let $V$ a vector space over $\mathbb{F}$ and let $S$ be a linearly independent subset of $V.$\\
+	Let $w \in V.$ Show that $S \cup \{w\}$ is linearly independent if and only if $w \notin \operatorname{span} S.$
+	%
+	\item Let $n \in \mathbb{N}\setminus\{1\}$ and let $k \in \mathbb{N}$ with $1 \le k < n.$\\
+	Let $S = \{v_1, v_2,\ldots, v_k\} \subset \mathbb{R}^n.$\\
+	Suppose that $S$ is linearly independent.\\
+	Let $v \in \mathbb{R}^n$ and $\epsilon > 0$ be given. \\
+	Show that there exists $w \in \mathbb{R}^n$ such that 
+	\begin{enumerate}[nosep] 
+		\item $S\cup\{w\}$ is linearly independent and 
+		\item $\|w - v\| < \epsilon.$\\
+		(Or alternately, each coordinate of $w$ differs from the corresponding coordinate of $v$ by at most $\epsilon.$)
+	\end{enumerate}
+	%
+	\item Let $n \in \mathbb{N}\setminus\{1\}.$ Let $\epsilon > 0$ be given.\\
+	Suppose $A = (a_{ij})$ is an $n \times n$ matrix with real entries.\\
+	Show that there exists an \emph{invertible} $n \times n$ matrix $B = (b_{ij})$ such that $|a_{ij} - b_{ij}| < \epsilon$ for each $i, j \in \{1, \ldots, n\}.$\\~\\
+	\emph{Bonus.} Show that you can even find a $B$ which differs from $A$ by no more than $n$ entries. Find a matrix $A$ for which you do require $n$ changes.
+	%
+	\item Let $(A_n)$ be a sequence of $m\times m$ real matrices where $m \in \mathbb{N}.$\\
+	We say that the sequence $(A_n)$ converges to \emph{the} matrix $A \in M_m(\mathbb{R}),$ if each coordinate sequence converges to the corresponding coordinate of $A$ in the usual sense. (It is clear that such a limit will be unique.)\\
+	Show that - given any $M \in M_m(\mathbb{R}),$ there exists a sequence $(M_n)$ of $m\times m$ real matrices such that $M$ is the limit of $(M_n)$ and $M_n$ is invertible for each $n \in \mathbb{N}.$
+	%
+	\item Let $n \in \mathbb{N}.$\\
+	Show that $\mathbb{R}^n$ (as a vector space over $\mathbb{R}$) has infinitely many distinct bases.
+	%
+	\item Let $V$ be a finite dimensional vector space.\\
+	Let $S$ be any linearly independent subset of $V.$\\
+	Show that there exists $T \subset V$ such that $S \cap T = \emptyset$ and $S \cup T$ is a basis for $V.$\\
+	(Make sure you cover all cases, including $S = \emptyset$ and $|S| = \dim V.$)
+	%
+	\item In continuation with the above exercise, show that this $T$ need not be unique.
+	%
+	\item Let $V$ be a vector space. Show that $S = \{v\} \subset V$ is linearly independent if and only if $v$ is not the zero vector.
+	%
+	\item Show that $\emptyset$ is a linearly independent subset of any vector space.
+	%
+	\item Let $V$ be a vector space. Let $S$ be a (finite) subset of $V.$\\
+	Show that the following two statements are equivalent:
+	\begin{enumerate} 
+		\item $S$ is not linearly independent.
+		\item $\exists v \in S$ such that $v \in \operatorname{span}(S\setminus\{v\}).$
+	\end{enumerate}
+	(Note that if $S$ is infinite, then we say that $S$ is linearly independent if every finite subset of $S$ is linearly independent. Similarly, $\operatorname{span} S$ is defined as the set of all \textbf{\emph{finite}} linear combinations of elements of $S.$)
+	%
+	\item Let $V$ be a vector space and $S \subset V.$\\
+	Suppose $S$ is not linearly independent.\\
+	By the previous exercise, there exists $v \in S$ such that $v \in \operatorname{span}(S\setminus\{v\}).$\\
+	Show that $\operatorname{span} S = \operatorname{span}(S\setminus\{v\}).$
+	%
+	\item Let $V$ be a finite dimensional vector space.\\
+	Let $S$ be any finite subset of $V$ such that $\operatorname{span} S = V.$\\
+	Show that there exists $T \subset S$ such that $T$ is a basis for $V.$\\
+	Do this again without the hypothesis that $S$ is finite.
+	%
+	\item In continuation with the above exercise, show that this $T$ need not be unique.
+	%
+	\item Let $V$ be an $n-$dimensional vector space over a field $\mathbb{F}$ for some $n \in \mathbb{N}.$\\
+	Let $S \subset V$ with $|S| = n.$\\
+	Show that the following are equivalent:
+	\begin{enumerate} 
+		\item $S$ is linearly independent.
+		\item $\operatorname{span} S = V.$
+		\item $S$ is a basis for $V.$
+	\end{enumerate}
+	%
+	\item Let $I \subset J \subset \mathbb{R}.$\\
+	Let $f$ and $g$ be real valued functions defined on $J.$\\
+	Show that if $f$ and $g$ are linearly independent on $I,$ then they are linearly independent on $J.$\\
+	Show that the converse is not true.
+	%
+	\item Let $V$ be a vector space. Let $S \subset V.$\\
+	Define $\mathcal{S} = \{W \subset V : S \subset W,\;W \text{ is a subspace of }V\},$ that is, $\mathcal{S}$ is the set of all subspaces of $V$ containing $S.$\\
+	Show that $\mathcal{S} \neq \emptyset.$
+	Show that $\operatorname{span} S = \displaystyle\bigcap_{W \in \mathcal{S}} W.$\\~\\
+	Recall that if $\displaystyle\bigcap_{W \in \mathcal{S}} W := \{w : w \in W \text{ for some }W \in \mathcal{S} \},$ if $\mathcal{S} \neq \emptyset.$
+\end{enumerate}
+
+\section{Linear maps}
+\begin{enumerate}
+	\item Let $V$ and $W$ be vector spaces over $\mathbb{F}.$\\
+	Let $T:V\to W$ be a bijection.\\
+	Show that $T^{-1}$ is linear if and only if $T$ is.
+	%
+	\item Let $V$ be a finite dimensional vector space over $\mathbb{F}$ and let $W$ be a subspace of $V.$\\
+	Show that there exists a linear transform $T:V\to V$ such that $\mathcal{N}(T) = W.$
+	%
+	\item Let $V$ be a vector space over $\mathbb{F}.$\\
+	Let $T:V\to V$ be a linear map such that $T\circ T = T.$\\
+	Show that $\mathcal{R}(T) \cap \mathcal{N}(T) = \{0\}.$
+	% 
+	\item Let $V$ and $W$ be vector spaces over $\mathbb{Q}.$\\
+	Let $T:V \to W$ be a function satisfying $T(x + y) = T(x) + T(y)$ for all $x, y \in V.$\\
+	Show that $T$ is a linear map.\\
+	(That is, show that $T(qx) = qT(x)$ for all $x \in V$ and $q \in \mathbb{Q}.$)
+	%
+	\item Let $V$ and $W$ be vector spaces over some field $\mathbb{F}.$\\
+	Let $a \in \mathbb{F}\setminus\{1\}.$\\
+	Let $T:V\to W$ be a linear map.\\
+	Suppose that $T(x) = T(ax)$ for all $x\in V.$\\
+	Show that $T(x) = 0$ for all $x \in V.$
+	%
+	\item Let $V$ be a finite dimensional vector space and $W_1,$ $W_2$ and $W$ be subspaces of $V$, such that $\dim W_1 = \dim W_2,$ $W_1 \cap W = \{0\} = W_2 \cap W,$ and $W_1 + W = V = W_2 + W.$\\
+	Prove that there exists a linear map $f:W_1 \to W$ such that $W_2 = \{w_1 + f(w_1) : w_1 \in W_1\}.$
+	%
+	\item Let $n \in \mathbb{N}.$\\
+	Let $f, g:\mathbb{R}^n \to \mathbb{R}$ be linear maps such that given any $x \in \mathbb{R}^n,$ $f(x) = 0 \implies g(x) = 0.$\\
+	Show that there exists $\lambda \in \mathbb{R}$ such that $g = \lambda f.$
+\end{enumerate}
+
+\section{Eigenvalues and diagonalisation} \label{sec:eval}
+\begin{enumerate}
+	\item Let $M \in M_n(\mathbb{C}).$ \\
+	Suppose $M$ has eigenvalues $\lambda_1, \ldots, \lambda_k \in \mathbb{C}$ with algebraic multiplicities $m_1, \ldots, m_k.$\\
+	Prove that $\lambda_1^{m_1}\cdots\lambda^{m_k} = \det M.$\\~\\
+	Is the result true if we replace $\mathbb{C}$ by $\mathbb{R}?$
+	% 
+	\item Let $A \in M_n(\mathbb{C})$ have $n$ distinct eigenvalues $\lambda_1,\ldots, \lambda_n$ such that $|\lambda_1| > |\lambda_i|$ for each $i \in \{2, \ldots, n\}.$\\
+	Prove that for ``most'' vectors $v \in \mathbb{C}^n,$ the sequence $v_k := \lambda_1^{-k}A^{k}v$ converges to a vector $w$ which is an eigenvector of $A$ with eigenvalue $\lambda_1.$\\
+	Determine precisely the values of $v$ for which this happens.
+	%
+	\item Suppose $A \in M_n(\mathbb{R})$ with eigenvalues $0, 1, \ldots, n-1$ corresponding to eigenvectors $v_0, v_1, \ldots, v_{n-1},$ respectively.\\
+	Show that $Ax = v_0$ has no solution for $x \in \mathbb{R}^n.$
+	%
+	\item Let $M$ be the matrix corresponding to a (standard $9\times9$) solved Sudoku.\\
+	Show that $45$ is an eigenvalue of $M.$
+	%
+	\item Let $D \in M_n(\mathbb{R}).$\\
+	Let $f(t) = \det(D - tI_n).$\\
+	Note that for a given polynomial $p(t) = a_0 + a_1t + \cdots + a_mt^m,$ we define $p(A) = a_0I_n + a_1A + \cdots + a_mA^m$ for every matrix $A \in M_n(\mathbb{R}).$
+	\begin{enumerate} 
+		\item Show that $f(D) = O,$ if $D$ is a diagonal matrix.
+		\item Show that $f(D) = O,$ if $D$ is similar to a diagonal matrix.
+	\end{enumerate}
+	(No, letting $t = D$ is not a correct proof.)\\~\\
+	\emph{Remark.} It is true that $f(D) = O$ for any $D \in M_n(\mathbb{R}).$ That is, every (square) matrix satisfies its own characteristic matrix. This is known as the Cayley-Hamilton theorem.
+	%
+	\item Let $A \in M_n(\mathbb{R}).$ Show that $A$ and $A^T$ have the same eigenvalues (including algebraic and geometric multiplicities).\\
+	Show that they need not have the same eigenvectors.
+	%
+	%
+	\item Let $M \in M_2(\mathbb{C}).$\\
+	Then, $M$ has 2 (possibly same) eigenvalues $\lambda$ and $\mu.$ (Why?)\\
+	Note that if $\lambda \neq \mu,$ then $M$ is diagonalisable. (How?)\\~\\
+	Suppose $\mu = \lambda.$\\
+	Now, it not necessary that $M$ is diagonalisable. For example, show that $M = \begin{bmatrix}
+			1 & 1\\
+			0 & 1
+		\end{bmatrix}$ is not diagonalisable.\\
+	Now, we show that even if $M$ is not diagonalisable, not all hope is lost, there is still a canonical similar matrix.\\
+	More precisely, we will show that if $M$ is not diagonalisable, them $M$ is similar to $J = \begin{bmatrix}
+			\lambda & 1\\
+			0 & \lambda
+		\end{bmatrix}.$ (Note that the converse is also true, that is, if $M$ is similar to such a matrix, then $M$ is not diagonalisable.)\\
+	Show the following:
+	\begin{enumerate} 
+		\item Show that $M - \lambda I \neq O.$
+		\item Show that $(M - \lambda I)^2 = O.$\\
+		(Hint: The only root of the characteristic polynomial is $\lambda.$)
+		\item Show that there exists $v \in \mathbb{C}^2$ such that $(M - \lambda I)v \neq 0.$
+		\item Let $w = (M - \lambda I)v.$ Show that $w$ is an eigenvector of $M.$
+		\item Show that $v$ and $w$ are linearly independent. Conclude that $\{w, v\}$ is a(n ordered) basis for $\mathbb{C}^2.$
+		\item Represent $M$ using this new basis. Observe that this is $J.$ Thus, $M \sim J.$
+	\end{enumerate}	
+	Thus, we can conclude by saying that a $2\times2$ complex matrix with eigenvalues $\mu$ and $\lambda$ is similar to exactly one of the following matrices:
+	\begin{align*} 
+		\begin{bmatrix}
+			\lambda & 0\\
+			0 & \mu
+		\end{bmatrix} \qquad
+		\begin{bmatrix}
+			\lambda & 1\\
+			0 & \mu
+		\end{bmatrix}
+	\end{align*}
+	Where the latter situation is possible only if $\lambda = \mu.$\\~\\
+	In general, we can do this for higher order matrices as well. The interested reader can look up Jordan canonical form to read more about it.\\
+	Note that the assumption of being in $\mathbb{C}$ was necessary to ensure that $2$ roots do exist. For example, the matrix $\begin{bmatrix}
+			0 & 1\\
+			-1 & 0
+		\end{bmatrix}$ cannot be put into any of the above two forms using only real matrices for the similarity transform. However, if you start with a matrix whose characteristic polynomial can be factored into linear factors, then the above result follows.
+	%
+	\item Let $A \in M_n(\mathbb{C}).$\\
+	Show that $A$ is invertible if and only if $0$ is not an eigenvalue of $A.$\\
+	In this case, show that if $\lambda$ is an eigenvalue of $A,$ then $\lambda^{-1}$ is an eigenvalue of $A^{-1}.$
+	%
+	\item Show that if $\lambda$ is an eigenvalue of $A,$ then $\lambda^2$ is an eigenvalue of $A^2.$
+	%
+	\item \label{fib} Consider the Fibonacci sequence $(F_n)_{n \in \mathbb{N}\cup\{0\}}$ which is defined as follows:\\
+	$F_0 = 0,\;F_1 = 1,\;F_{n+2} = F_{n+1} + F_{n}$ for all $n \in \mathbb{N}\cup\{0\}.$\\
+	Find an appropriate sized matrix $A$ such that:
+	\[\begin{bmatrix}
+		F_{n+1}\\
+		F_n
+	\end{bmatrix}
+	= A\begin{bmatrix}
+		F_n\\
+		F_{n-1}
+	\end{bmatrix}.\]
+	Show that 
+	\[\begin{bmatrix}
+		F_{n+1}\\
+		F_n
+	\end{bmatrix}
+	= A^n\begin{bmatrix}
+		F_1\\
+		F_{0}
+	\end{bmatrix}.\]
+	Find the eigenvalues of $A.$ Note that these are two distinct eigenvalues and thus, $A$ is diagonalisable. Find an invertible $P$ such that $P^{-1}AP = D$ where $D$ is a diagonal matrix.\\
+	Hence, find an explicit formula for $F_n.$
+\end{enumerate}
+
+\section{Similarity}
+\begin{enumerate} 
+	\item Let $A$ and $B$ be similar matrices. Show that $\rank A = \rank B.$
+	%
+	\item Let $A, B \in M_n(\mathbb{F})$ be similar matrices.\\
+	Show that $A$ is invertible if and only if $B$ is invertible.\\
+	Do this with and without appealing to an argument using determinants.
+	%
+	\item Prove that if $A, B \in M_n(\mathbb{F})$ and if $A$ is nonsingular, then $AB$ is similar to $BA.$
+	%
+	\item Let $A, P \in M_n(\mathbb{R})$ with $P$ invertible. Show that $\operatorname{trace}(A) = \operatorname{trace}(PAP^{-1}).$
+	%
+	\item Show that similar matrices have the same characteristic polynomial. Show that non-similar matrices can also have the same characteristic polynomial.
+\end{enumerate}
+
+\section{Some other vector spaces}
+\begin{enumerate} 
+	\item Let $\mathcal{C}[0, 1] := \{f:[0, 1] \to \mathbb{R} \;|\; f \text{ is continuous}.\}$\\
+	Given two functions $f, g \in \mathcal{C}[0, 1],$ define $f+g : [0, 1] \to \mathbb{R}$ as $(f+g)(x) = f(x) + g(x).$\\
+	Given $f \in \mathcal{C}[0, 1]$ and $r \in \mathbb{R},$ define $r\cdot f:[0, 1] \to \mathbb{R}$ as $(r\cdot f)(x) = rf(x).$\\~\\
+	Show that if $r \in \mathbb{R}$ and $f, g \in \mathcal{C}[0, 1],$ then $f+g \in \mathcal{C}[0, 1]$ and $r\cdot f \in \mathcal{C}[0, 1].$\\
+	Show that $\mathcal{C}[0, 1]$ is a vector space over $\mathbb{R}$ with the above operations.
+	%
+	\item Given $f, g \in \mathcal{C}[0, 1],$ define $\langle f, g\rangle$ as:
+	\[\langle f, g\rangle := \int_{0}^{1} f(x)g(x) \text{d}x.\]
+	Show that the above defines an inner product.\\
+	(Note: It is crucial that $\mathcal{C}[0, 1]$ contains continuous functions. Why?)
+	%
+	\item Let $\mathbb{R}[x]$ denote the set of polynomials with real coefficients.\\
+	Show that:
+	\begin{enumerate} 
+		\item $\mathbb{R}[x]$ is vector space over $\mathbb{R}.$ (Addition and scalar multiplication is defined in the usual sense.)
+		\item No finite set $S$ can be a basis for $\mathbb{R}[x].$
+		\item The set $S = \{1, x, x^2, \ldots\}$ is a basis for $\mathbb{R}[x].$
+		\item The set $S' = \{1, 1+x, 1+x+x^2, \ldots\}$ is a basis for $\mathbb{R}[x].$
+		\item The set $S'' = \{x, x^2, x^3, \ldots\}$ is linearly independent but not a basis for $\mathbb{R}[x].$
+		\item The set $S''' = \{1, 2, x, x^2, x^3, \ldots\}$ is spanning but not a basis for $\mathbb{R}[x].$
+	\end{enumerate}
+	What difference (between finite dimensional and infinite dimensional spaces) is reflected by the last two parts?
+	%
+	\item Define $f, g:\mathbb{R}\to\mathbb{R}$ as follows:
+	\begin{align*} 
+		f(x) := \left\{\begin{array}{l r}
+			x^3 & x > 0\\
+			0 & x \le 0
+		\end{array}
+		\right|
+		\quad
+		g(x) := \left\{\begin{array}{l r}
+			x^3 & x < 0\\
+			0 & x \ge 0
+		\end{array}
+		\right.
+	\end{align*}	
+	Show that $f$ and $g$ are linearly independent. (Think of them being elements of the vector space consisting of all functions from $\mathbb{R}$ to $\mathbb{R}.$ The zero-vector would be the function which is identically zero on all of $\mathbb{R}.$)\\
+	Prove that $f$ and $g$ are differentiable everywhere.\\~\\
+	Define $W:\mathbb{R}\to\mathbb{R}$ as:
+	\[W(x) := \left|\begin{array}{c c}
+		f(x) & g(x)\\
+		f'(x) & g'(x)
+	\end{array}\right|.\]
+	Show that $W(x) = 0$ for all $x \in \mathbb{R}.$\\~\\
+	Thus, the Wronskian of two functions can be zero everywhere even if the two functions are linearly independent.
+	%
+	\item Let $\mathbb{R}^\infty$ denote the set of all those real sequences that are eventually $0.$ Show that it is a vector space over $\mathbb{R}$ where addition and scalar multiplication have their usual meanings.\\
+	Show that this vector space has a countable basis by exhibiting one.
+	%
+	\item Let $\mathbb{R}^\mathbb{N}$ denote the vector space of all real spaces. (Vector space over $\mathbb{R}$.)\\
+	Define a sequence $(x_n) \in \mathbb{R}^\mathbb{N}$ to be Fibonacci-like if $x_{n+2} = x_{n+1} + x_n$ for all $n \in \mathbb{N}.$ \\
+	Let $F \subset \mathbb{R}^\mathbb{N}$ be the set of all Fibonacci-like sequences. Show that $F$ is a finite dimensional subspace of $\mathbb{R}^\mathbb{N}.$\\
+	Find a basis for $F.$ 
+\end{enumerate}
+
+\section{Inner product}
+\begin{enumerate} 
+	\item Let $V$ be an inner product space. Let $v \in V.$\\
+	Show that if $\langle w, v\rangle = 0$ for all $w \in V,$ then $v = 0.$\\
+	Show that the converse is true too.
+	%
+	\item Let $A \in M_n(\mathbb{C}).$ Show that if $\lambda \in \mathbb{C}$ is an eigenvalue of $A,$ then $\bar{\lambda}$ is an eigenvalue of $A^*.$
+	%
+	\item Let $A \in M_n(\mathbb{C}).$ We say that $A$ is normal if $AA^* = A^*A.$\\
+	Let $A$ be normal.\\
+	Show the following:
+	\begin{enumerate} 
+		\item $\langle Av, Av\rangle = \langle A^*v, A^*v\rangle$ for all $v \in \mathbb{C}^n.$
+		\item $A - \lambda I$ is normal for any $\lambda \in \mathbb{C}.$
+		\item $Av = \lambda v \implies A^*v = \bar{\lambda} v$ where $\lambda \in \mathbb{C}$ and $v \in \mathbb{C}^n.$\\
+		Thus, adjoint of a matrix has the same eigenvectors corresponding to the eigenvalue's conjugate.
+	\end{enumerate}
+	%
+	\item Let $V$ and $W$ be vector spaces over $\mathbb{C}.$ Let $T:V\to W$ be a linear map.\\
+	Let $U \subset V.$\\
+	Show that if $T(U) \subset U,$ then $T^*(U^\perp) \subset U^\perp.$
+	%
+	\item Let $A \in M_n(\mathbb{C})$ be a normal matrix.\\
+	Let $\lambda, \mu \in \mathbb{C}.$ Suppose $x, y \in \mathbb{C}^n$ are such that $Ax = \lambda x$ and $Ay = \mu y.$\\
+	Show that $\lambda \neq \mu \implies \langle x, y\rangle = 0.$\\
+	Thus, if $x$ and $y$ are eigenvectors corresponding to distinct eigenvalues, then not only are they linearly independent but also orthogonal.\\
+	(Note that if $x$ and $y$ are eigenvectors, then $x \neq 0 \neq y.$)
+	%
+	\item Let $A \in M_n(\mathbb{C})$ be a normal matrix.\\
+	Let $\lambda$ be an eigenvalue of $A.$\\
+	Show that $\mathcal{N}(A - \lambda I) = \mathcal{N}(A - \lambda I)^2.$
+	%
+	\item Let $V$ be an inner product space. Let $S$ be a subset of $V.$\\
+	Define $W := \{w \in V : \langle w, s\rangle = 0 \text{ for every } s \in S\}.$\\
+	Show that $W$ is a subspace of $V.$
+	%
+	\item Let $V$ be an inner product space of dimension $n \in \mathbb{N}.$ Let $S$ be a subspace of $V.$\\
+	Define $W := \{w \in V : \langle w, s\rangle = 0 \text{ for every } s \in S\}.$\\
+	Show that $\dim S + \dim W = n.$
+	%
+	\item Suppose $A$ is an $m \times n$ real matrix.\\
+	Show that $\mathcal{N}(A^TA) = \mathcal{N}(A).$\\
+	(Hint: Recall the natural inner product on $\mathbb{R}^n.$)
+	%
+\end{enumerate}
+
+\section{Miscellaneous}
+\begin{enumerate}
+	\item Find a matrix $M \in M_2(\mathbb{C})$ such that $X^2 = M$ has no solution for $X \in M_2(\mathbb{C}).$
+	%
+	\item Suppose you are given that a function $f:\mathbb{R}\to\mathbb{R}$ is a polynomial of degree of at most $n.$\\
+	Show that $f$ cannot be uniquely determined by specifying its value at $n$ distinct real numbers.\\
+	Show that $f$ can be uniquely determined by specifying its value at $n+1$ distinct real numbers.\\
+	Find this polynomial.
+	%
+	\item Let $A$ be an $m \times n$ real matrix and $B$ be an $m \times 1$ real matrix.\\
+	Show that:
+	\begin{enumerate}[nosep] 
+		\item If $Ax = B$ has two distinct solutions for $x \in \mathbb{R}^n,$ then there are infinitely many such solutions.
+		\item If $Ax = B$ has a solution for $x \in \mathbb{C}^n\setminus\mathbb{R}^n,$ then there are infinitely many solutions for $x \in \mathbb{R}^n.$
+	\end{enumerate}
+	%
+	\item Let $A$ be an $m \times n$ real matrix and $b$ be an $m \times 1$ real matrix. Suppose that $Ax = 0$ has infinitely many solutions.\\
+	Prove or disprove: $Ax = b$ has infinitely many solutions.
+	%
+	\item Let $A$ be an $m \times n$ real matrix and let $B$ be an $n \times m$ real matrix.\\
+	Show that $I_m - AB$ is invertible if and only if $I_n - BA$ is.
+	%
+	\item Let $V$ be a vector space over $\mathbb{R}$ containing two distinct elements. Show that $V$ has infinitely many distinct elements.
+	% 
+	\item Suppose $A \in M_n(\mathbb{R}).$ If $Ax = 0 \iff x = 0,$ find the value of $\rank AA^T + \rank A^TA.$\\
+	(Hint: Recall the natural inner product on $\mathbb{R}^n.$)
+	%
+	\item Let $u = (u_1, \ldots, u_n)^T$ and $v = (v_1, \ldots, v_n)^T$ be nonzero vectors in $\mathbb{R}^n,$ where $n > 1.$\\
+	Define $(b_{ij}) = B \in M_n(\mathbb{R})$ according to the rule $b_{ij} = u_iv_j$ for $i, j \in \{1, \ldots, n\}.$\\
+	Find all the eigenvalues of $B$ along with the geometric and algebraic multiplicities.\\
+	Find the rank of $B.$\\
+	Show that $u$ is an eigenvector of $B.$
+	%
+	\item Let $A, B \in M_n(\mathbb{R}).$\\
+	Show that $\rank A + \rank B \le \rank AB + n.$
+	%
+	\item Suppose $A \in M_2(\mathbb{R})\setminus\{I, -I\}$ satisfies $A^2 = I.$\\
+	Show that the characteristic polynomial of $A$ factors into linear factors.\\
+	Show that $\operatorname{trace} A = 0$ and $\det A = -1.$
+	%
+	\item Consider the following subset $S$ of $\mathbb{R}^{5}:$
+	\[S := \left\{\begin{pmatrix}
+				1\\
+				1\\
+				1\\
+				1\\
+				1
+			\end{pmatrix},
+			\begin{pmatrix}
+				1\\
+				1\\
+				1\\
+				1\\
+				0
+			\end{pmatrix},
+			\begin{pmatrix}
+				1\\
+				1\\
+				1\\
+				0\\
+				0
+			\end{pmatrix},
+			\begin{pmatrix}
+				1\\
+				1\\
+				0\\
+				0\\
+				0
+			\end{pmatrix},
+			\begin{pmatrix}
+				1\\
+				0\\
+				0\\
+				0\\
+				0
+			\end{pmatrix}\right\}.\]
+	Note that $S$ is not orthogonal with respect to the standard inner product of $\mathbb{R}^5.$\\
+	Find a subset $G \subset \mathbb{R}^5$ such that:
+	\begin{enumerate}[nosep] 
+		\item $G$ is orthogonal with respect to the standard inner product of $\mathbb{R}^5.$
+		\item $\operatorname{span} G = \operatorname{span} S.$
+		\item $G$ has $6$ elements.
+	\end{enumerate}
+	Or show that no such $G$ exists.
+	%
+	\item Let $A \in M_n(\mathbb{C}).$ \\
+	Show that if $A$ is unitary, then $\det A \in \{1, -1\}.$\\
+	Show that the converse is not true.
+	%
+	\item Give an example of $A \in M_2(\mathbb{C})$ such that $X^2 \neq A$ for any $X \in M_2(\mathbb{C}).$
+	%
+	\item Let $A \in M_3(\mathbb{R})$ and $0 \neq y \in \mathbb{R}^3.$\\
+	Suppose the equation $Ax = y$ has the following three solutions for $x:$\\~\\
+	\begin{enumerate*} 
+		\item $\begin{pmatrix}
+					3\\
+					4\\
+					5
+				\end{pmatrix}$
+		\item $\begin{pmatrix}
+					5\\
+					12\\
+					13
+				\end{pmatrix}$
+		\item $\begin{pmatrix}
+					7\\
+					24\\
+					25
+				\end{pmatrix}$
+	\end{enumerate*}
+
+	Find the complete set of solutions for $Ax = y.$
+	%
+	\item Let $M \in M_n(\mathbb{R})$ such that $M^2 = O.$ Show that $\rank M \le n/2.$\\
+	Let $n$ be an even natural number. Show that the equality can be achieved.\\
+	(Obviously it can't be achieved if $n$ is odd.)
+	%
+	\item Let $V$ be a finite dimensional vector space. Let $U$ and $W$ be subspaces of $V.$\\
+	Define $U + W := \{v \in V : v = u + w \text{ for some } u \in U,\; w\in W\}.$ \\
+	Prove the following result:
+	\[\dim U + \dim W = \dim (U \cap W) + \dim (U + W).\]
+	(Hint: Consider a basis $B$ of $U \cap W$ and extend that to bases $B_1$ and $B_2$ of $U$ and $W$ and use that to obtain a basis for $U+W.$)
+	%
+	\item Show that $AB - BA \neq I_n$ for every $A, B \in M_n(\mathbb{R}).$
+	%
+	\item Let $V$ and $W$ be finite dimensional vector spaces over some field $\mathbb{F}.$\\
+	Show that $V$ and $W$ are isomorphic if and only if they have the same dimension.
+	%
+	\item Show the the following sets of functions are linearly independent on $(0, \infty)$.
+	\begin{enumerate}[nosep] 
+		\item $\{\sin x, \sin 2x,\ldots, \sin nx\}$ for any $n \in \mathbb{N}.$
+		\item $\{e^{a_1x}, e^{a_2x}, \ldots, e^{a_nx}\},$ where $n \in \mathbb{N}$ and $a_1, a_2, \ldots, a_n$ are distinct real numbers.
+		\item $\{1, x, \ldots, x^n\}$ for any $n \in \mathbb{N}.$
+		\item $\{e^{mx}, xe^{mx},\ldots, x^ne^{mx}\}$ for any $n \in \mathbb{N}$ and $m \in \mathbb{R}.$
+		\item $\{x^k, x^k(\log x), \ldots, x^k(\log x)^n\}$ for any $n \in \mathbb{N}$ and $k \in \mathbb{N}.$
+	\end{enumerate}
+	These sets of functions will show up in your next course, MA 108.
+	%
+	\item Consider the following $n\times n$ complex matrix $C$ given as
+	\[C := \begin{bmatrix}
+		c_0 & c_{n-1} & \ldots & c_2 & c_1\\
+		c_1 & c_0 & c_{n-1} & & c_2\\
+		\vdots & c_1 & c_0 & \ddots & \vdots\\
+		c_{n-2} & & \ddots & \ddots & c_{n-1}\\
+		c_{n-1} & c_{n-2} & \ldots & c_1 & c_0
+	\end{bmatrix}.\]
+	That is, the first column of $C$ is the column vector $c = [c_0 \; c_1\; \ldots\; c_{n-1}]^T$ and the remaining columns are cyclic permutations of the vector $c$ with offset equal to the column index.\\
+	Find all the eigenvalues and eigenvectors of $C$.\\
+	Is $C$ always diagonalisable? (That is, for any choice of the first vector $c.$)\\
+	What is the determinant of $C$?\\
+	You may give your answer in terms of the following polynomial: $f(x) = c_0 + c_1x + \cdots + c_{n-1}x^{n-1}.$\\~\\
+	(Hint: The \emph{root} of the problem lies in \emph{unity}.)
+	%
+	\item Show that the equation $X^2 = -I_n$ has a solution for $X \in M_n(\mathbb{R})$ if and only if $n$ is even.\\
+	(Hint: For the even case, think in terms of linear functions.)
+	%
+	\item Let $A \in M_2(\mathbb{R})$ be an orthogonal matrix.\\
+	Is it true that there exists $\theta \in [0, 2\pi)$ such that $A = \begin{bmatrix}
+		\phantom{-}\cos \theta & \sin \theta\\
+		-\sin \theta & \cos \theta
+	\end{bmatrix}?$
+	%
+\end{enumerate}
+
+\section{Big Boi Stuff}
+\begin{enumerate}
+	\item Let $\mathbb{F}$ be a finite field with $q$ elements.\\
+	Find the cardinality of $GL_n(\mathbb{F}) = \{M \in M_n(\mathbb{F}) : \det M \neq 0\}.$
+	%
+	\item Let $S^1 := \{(x, y) \in \mathbb{R}^2 : x^2 + y^2 = 1\}.$\\
+	Define $+:S^1 \times S^1 \to S^1$ and $\cdot:\mathbb{R}\times S^1\to S^1$ in a way such that $(S, +, \cdot)$ is a vector field over $\mathbb{R}.$
+	% 
+	\item Let $V$ be a vector space over some field $\mathbb{F}.$ Assume that $V$ is not the zero vector space.\\
+	Let $\mathcal{I}$ be the set of all linearly independent subsets of $V.$ (Note that the elements of $\mathcal{I}$ are not vectors but rather, sets of vectors. In other words, $\mathcal{I}$ is not a subset of $V$ but rather a subset of the power set of $V.$)\\~\\
+	We shall call a subset $\mathcal{C}$ of $\mathcal{I}$ to be a \emph{chain} if it has the following property:
+	\begin{itemize}
+		\item Given $A,\; B \in \mathcal{C},$ either $A \subset B$ or $B \subset A.$
+	\end{itemize}
+	We shall call an element $M \in \mathcal{I}$ to be \emph{maximal} if there exists no $M' \in \mathcal{I}$ such that $M \subsetneq M'.$ (That is, there is no proper superset of $M$ in $\mathcal{I}.$)\\
+	Show that the following two statements are true:
+	\begin{enumerate}
+		\item $\mathcal{I}$ is nonempty.
+		\item Given any chain $\mathcal{C}$ of $\mathcal{I},$ there exists some $U \in \mathcal{I}$ such that $C \subset U$ for every $C \in \mathcal{C}.$
+		\item If there exists a maximal element $M,$ then $M$ must be a basis for $V.$
+	\end{enumerate}
+	(Note that fancy capital letters ($\mathcal{I}$ and $\mathcal{C}$) are used for set of sets of vectors and normal capital letters ($A,B,C,M$) are used for sets of vectors, they are subsets of $V.$)\\~\\
+	\emph{Remark.} Zorn's Lemma states that (a) and (b) imply the existence of a maximal element $M.$ Thus, what you have shown is that every non-zero vector space has a basis. By convention, we say that $\emptyset$ is a basis for the zero space and thus, every vector space has a basis.\\
+	In fact, Zorn's lemma is a bit more general but that would require the introduction of some more concepts like that of a \emph{partially ordered set}.\\
+	The reader is encouraged to read up more about \emph{Zorn's Lemma} or its equivalent, the infamous \emph{Axiom of Choice}.
+	%
+	\item Show that no countable subset of $\mathbb{R}$ can be a basis of $\mathbb{R},$ considered as a vector space over $\mathbb{Q}.$
+	%
+	\item Given an (infinite) basis $B$ of $\mathbb{R}$ over $\mathbb{Q},$ construct a basis $B'$ over $\mathbb{C}$ over $\mathbb{Q}.$\\
+	Show that there exists a bijection $\varphi:B\to B'.$\\
+	Using this, conclude that $\mathbb{C}$ and $\mathbb{R}$ are isomorphic as vector spaces over $\mathbb{Q}.$\\
+	(Using the above, also show that $\mathbb{R}$ and $\mathbb{C}$ are isomorphic as additive groups.)
+	%
+	\item Give an example of a vector space $V$ (over $\mathbb{R}$) and a linear function $T:V\to V$ such that null space of $T$ is non-zero but the image is still $V.$\\
+	(Hint: Show that $V$ cannot be finite dimensional.)
+	%
+	\item Let $M \in M_n(\mathbb{R})$ be a diagonalisable matrix with $k$ eigenvalues. Show that $M$ cannot satisfy a polynomial with degree strictly less than $k.$\\
+	Show that it does satisfy a polynomial of degree $k.$\\
+	(Hint: Show that every eigenvalue \emph{must} be a root of the polynomial.)
+	%
+	\item Let $(G_1, +, \cdot)$ and $(G_2, +, \cdot)$ be vector spaces over $\mathbb{Q}.$\\ 
+	Show that $G_1$ and $G_2$ are isomorphic as groups if and only if they are isomorphic as vector spaces (over $\mathbb{Q}$).
+	%
+	\item Let $G_1$ and $G_2$ be additive groups which are also vector spaces over some field $\mathbb{F}.$\\
+	Show that $G_1$ and $G_2$ are isomorphic as groups if they are isomorphic as vector spaces over $\mathbb{F}.$\\
+	Show that the converse need not be true.\\
+	(Converse does hold in the special case that $\mathbb{F} = \mathbb{Q}.$)
+	%
+	\item Consider $\mathbb{R}$ as a vector space over $\mathbb{Q}.$\\
+	Assume that there exists a basis $B$ for this vector space.\\
+	Using this basis, construct a function $f:\mathbb{R}\to\mathbb{R}$ which satisfies $f(x+y) = f(x) + f(y)$ but $f(x)$ cannot be written as $rx$ for any $r \in \mathbb{R}.$\\
+	In fact, one can come up with extremely bizarre, wildly discontinuous and unbounded everywhere functions.\\~\\
+	\emph{Remark.} Recall the question from MA105 where you showed that requiring continuity at just $0$ is enough to prove that the function is of the form $rx.$ This shows that any other function must be discontinuous.\\
+	The assumption that there does exist a basis can be proven via the so-called \emph{Axiom of Choice}, or its equivalent, Zorn's Lemma. Axiom of Choice is a seemingly innocent looking statement but it has quite unintuitive results such as the existence of these extremely badly behaved functions. The reader is encouraged to read more about this.
+	%
+	\item Let $B$ be a basis for the vector space $\mathbb{R}$ over the field $\mathbb{Q}.$ Let $a \in \mathbb{R}\setminus\{1\}.$\\
+	Show that there exists $x \in B$ such that $ax \notin B.$
+	%
+	\item Let $\mathbb{R}^\mathbb{N}$ denote the set of real sequences. Show that it is a vector space over $\mathbb{R}$ where addition and scalar multiplication have their usual meanings.\\
+	Show that the following set $S$ is linearly independent:
+	\[S = \{(1, x, x^2, x^3, \ldots) \in \mathbb{R}^\mathbb{N} : x \in \mathbb{R}\}.\]
+	Note that $S$ has the same cardinality as that of $\mathbb{R}.$\\
+	Conclude that this vector space cannot have a countable basis.\\
+	Note that $\mathbb{R}^\mathbb{N}$ has the same cardinality as that of $\mathbb{R}.$ (How?)\\
+	Assuming Axiom of Choice, $\mathbb{R}^\mathbb{N}$ has a basis and by the above exercise, its cardinality must also be that of $\mathbb{R}.$ (How?)
+	%
+	\item Suppose that you are given a recursively defined sequence $(s_n)_{n\in\mathbb{N}}$ of the following form.\\
+	$s_{n} = a_1s_{n-1} + a_2s_{n-2} + a_3s_{n-3}$ for $n \ge 4$ along with initial values $s_1,\;s_2,$ and $s_3.$ $a_1, a_2, a_3$ are some fixed constants.\\
+	Represent the above in matrix form like question \ref{fib} of Section \ref{sec:eval}.\\
+	Suppose that you are asked to evaluate the last $8$ digits of $s_{10^{18}}.$ How would you write a program which could that for you? Can you write an algorithm that performs around $\lfloor \log_2(10^{18})\rfloor$ matrix multiplications?\\~\\
+	\emph{Remark.} There was nothing special about the fact that the recursion went only till $3$ terms. This can be extended easily for higher lengths. However, matrix multiplication itself will become more time consuming.
+	%
+	\item Let $V$ be a vector space over $\mathbb{Q}$ of dimension $3.$ Let $u,v,w \in V$ be vectors such that $u\neq 0$ and there exists a linear map $T:V\to V$ such that $T(u)=v,T(v)=w,$ and $T(w)=u+v.$\\
+	Show that $\{u, v, w\}$ is a basis of $V.$\\
+	Show that if we replace $\mathbb{Q}$ with $\mathbb{R},$ then the result need not hold.
+	%
+\end{enumerate}
+
+\section{Matrix Exponentiation}
+	For $A \in M_n(\mathbb{C}),$ define $e^A$ as:
+	\[e^A = I + \frac{1}{1!}A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \cdots.\]
+	It can be shown that the series on the right converges for every $A \in M_n(\mathbb{C}).$\\
+	In general, it isn't easy to calculate the entries of $e^A.$ In particular, they are not the entries individually exponentiated. This should be no surprise given the nature of matrix multiplication.
+	\begin{enumerate} 
+		\item Show that if $D$ is a diagonal matrix, then $e^D$ is also diagonal. Moreover, compute the diagonal entries explicitly in terms of the original entries.
+		\item Let $P$ be an invertible $n \times n$ complex matrix.\\
+		Show that $Pe^AP^{-1} = e^{PAP^{-1}}.$
+		\item Calculate $e^A$ for $A = \begin{bmatrix}
+			1 & 1\\
+			0 & 2
+		\end{bmatrix}.$
+		\item Note that, in general, it is not true that $e^{A+B} = e^Ae^B.$\\
+		However, it is true in the case that $AB = BA.$\\
+		Using this or otherwise, calculate $e^A$ for $A = \begin{bmatrix}
+			2 & 3\\
+			0 & 2
+		\end{bmatrix}.$
+		\item Find matrices $A$ and $B$ such that $e^{A+B} \neq e^Ae^B.$
+		\item Show that $e^{\operatorname{trace} A} = \det(e^A).$\\
+		You may use the following fact - for any $A,$ there exists an invertible matrix $P \in M_n(\mathbb{C})$ such that $PAP^{-1}$ is a triangular matrix.
+	\end{enumerate}
+\end{document}
