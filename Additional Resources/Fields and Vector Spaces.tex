@@ -77,7 +77,7 @@ In fact, nicely enough, it \emph{is} true in general and can be proven using jus
 Similarly, it can shown that the $b$ described in (A4) is indeed unique using just (A2) - (A4). (Check!)\\
 Analogous results also hold for (A7) and (A8).\\~\\
 Thus, keeping in mind the above results, we introduce the following notations:\\
-For any $a \in \mathbb{F},$ $-a$ denotes \emph{the} additive inverse of $a$, that is, the unique element such that $a + (-a) = 0.$\\
+For any $a \in \mathbb{F},$ $-a$ denotes \emph{the} additive inverse of $a,$ that is, the unique element such that $a + (-a) = 0.$\\
 For any $a \in \mathbb{F}\setminus\{0\},$ $a^{-1}$ denotes \emph{the} multiplicative inverse of $a$, that is, the unique element such that $a \cdot a^{-1} = 1.$
 
 \subsection{Examples}
@@ -94,15 +94,15 @@ For example, if $n = 3,$ then $2 + 2 = 1 \in \mathbb{Z}_3$ and $2\times 2 = 1 \i
 Now, a natural question to ask is whether $(\mathbb{Z}_n, +, \cdot)$ always a field?\\
 The answer is \emph{no}. That is, it is not \emph{always} a field.\\
 For example, $\mathbb{Z}_4$ is not a field. One can verify that $2 \in \mathbb{Z}_4$ has no multiplicative inverse.\\
-On the other hand, $\mathbb{Z}_3$ indeed is a field. This can be verified by making the multiplication and addition table and manually checking all the (finite) combinations.\\
+On the other hand, $\mathbb{Z}_3$ indeed is a field. This can be verified by making the multiplication and addition table and manually checking all the (finitely many) combinations.\\
 In fact, it is easy to show that all axioms except (A8) always hold for any $n.$ Thus, it is only the existence of multiplicative inverses that one needs to check. ((A10) holds as $n > 1$.)\\~\\
 The next natural question is the following - For \emph{what} values of $n$ is $\mathbb{Z}_n$ a field?\\
 Before continuing, the reader is encouraged to answer this themselves. \\
-The question has a nice answer - $\mathbb{Z}_n$ is a field if and only if $n$ is a prime.\\
+This question has a nice answer - $\mathbb{Z}_n$ is a field if and only if $n$ is a prime.\\
 To prove both the directions, you would have to show the following:
 \begin{enumerate}[nosep] 
 	\item If $n$ is not a prime, then there exists some non-zero element $a \in \mathbb{Z}_n$ such that $a$ has no multiplicative inverse.
-	\item If $n$ is a prime, then every non-zero element $a \in \mathbb{Z}_n$ has a multiplicative.
+	\item If $n$ is a prime, then every non-zero element $a \in \mathbb{Z}_n$ has a multiplicative inverse.
 \end{enumerate}
 The above is not too tough and I encourage the reader to prove this.\\~\\
 %
@@ -140,7 +140,7 @@ Note that we observed earlier that $\mathbb{Z}_n$ is not a field if $n$ isn't a 
 As before, we start with the definition of what a vector space is.\\
 Let $V$ be a set and $\mathbb{F}$ a field. Let $+:V\times V\to V$ be a binary operation on $V$ and $\cdot:\mathbb{F}\times V\to V$ be a function.\\
 Note that this is \emph{\textbf{not}} a binary operation on either $V$ or $\mathbb{F}.$\\
-We say that $(V, +, \cdot)$ is a \emph{vector space over} $\mathbb{F}$ if the following axiom (properties) hold.
+We say that $(V, +, \cdot)$ is a \emph{vector space over} $\mathbb{F}$ if the following axioms (properties) hold.
 \begin{enumerate}[label = (A\arabic*)] 
 	\item For all $u, v \in V:$ $u + v = v + u.$
 	\item For all $u, v, w \in V:$ $u + (v + w) = (u + v) + w.$
