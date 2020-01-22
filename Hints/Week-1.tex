@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{centernot}
+
+\newtheorem{theorem}{Theorem}
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+%\renewcommand{\span}{\operatorname{span}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{Tutorial 1}				% change
+\author{Aryaman Maithani}%\\
+%\small TA for D1-T5}
+\date{22nd January 2020}		% change
+
+\begin{document}
+\maketitle
+
+\hrulefill
+
+\begin{center}
+	\textsc{Disclaimer}
+\end{center}
+These are \textbf{not} complete solutions and should not be regarded as such. The purpose of this is to basically get you started and you must fill in the gaps. To be more explicit, if what you care about is marks, then just the solutions written here won't suffice.
+
+\hrulefill
+
+\begin{enumerate} 
+	\item \begin{enumerate} 
+		\item Use the definition and note that $(AB)^t = B^tA^t$. Make sure you prove both the directions of the \emph{iff} statement.
+		\item $S = \frac{1}{2}(A + A^t)$ and $T = \frac{1}{2}(A - A^t).$\\
+		Argue that the above matrices do have the properties required. This shows the existence part.\\~\\
+		For the uniqueness part, assume that $S'$ and $T'$ are some other matrices with the same properties. Conclude that $S = S'$ by computing $A + A^t$ and likewise for $T'.$
+	\end{enumerate}
+	\item \begin{enumerate} 
+		\item $A = \begin{pmatrix}
+			0 & 0\\
+			1 & 0\\
+		\end{pmatrix},\; B = \begin{pmatrix}
+			0 & 1\\
+			0 & 0\\
+		\end{pmatrix}.$\\~\\
+		You still have to argue why these do have the properties required.
+		\item Let $m, n \in \mathbb{N}$ be such that $A^m = O = B^n.$\\
+		Compute $(A + B)^{m+n}$ and $(AB)^n$ to conclude.
+	\end{enumerate}
+	\item Hint: $(I - BA)(I + B(I - AB)^{-1}A) = I.$
+	\item The system of linear equations can be written in the form $Ax = b.$\\
+	Consider the augmented matrix $[A\mid b]$ and convert to reduced echelon form.\\
+	You should arrive at pivots in the second, third, and fourth columns.\\
+	Thus, the free variables are the first and fifth one.\\
+	Back-substitute starting from the last equation to get $x_4,$ $x_3,$ and $x_2$ in terms of $x_1$ and $x_5.$ (In fact, they'll only be in terms of $x_5$ but consider that as $+0x_1$.)\\~\\
+	Thus, the complete set of solutions would be $(x_1, x_2, x_3, x_4, x_5)$ after substituting the values of $x_2, x_3 ,x_4$ in terms of $x_1$ and $x_5.$\\
+	If my calculations are correct, you should get it finally to be of the form:
+	\[(0, 8, 0, -1, 0) + x_1(1, 0, 0, 0, 0) + x_5\left(0, -\frac{33}{10}, -\frac{3}{10}, -\frac{1}{2}, 1\right),\]
+	where $(x_1, x_5) \in \mathbb{R}^2.$\\
+	(That is, a two-parameter family of solutions.)\\~\\
+	You may also write it as the following in set notation:
+	\[\left\{\left.(0, 8, 0, -1, 0) + x_1(1, 0, 0, 0, 0) + x_5\left(0, -\frac{33}{10}, -\frac{3}{10}, -\frac{1}{2}, 1\right) \right| (x_1, x_5) \in \mathbb{R}^2\right\}.\]
+	\item Same concept as previous.
+\end{enumerate}
+\end{document}
