@@ -49,7 +49,10 @@ These are \textbf{not} complete solutions and should not be regarded as such. Th
 \hrulefill
 
 \begin{enumerate} 
-	\item Just do it. The following is one of the possible sequence of steps you could do for the Gauss Jordan part:
+	\item Just do it. \\
+	Note that when doing the Gauss Jordan part, do it in the same algorithm as described in class.
+	\iffalse
+	The following is one of the possible sequence of steps you could do for the Gauss Jordan part:
 	\begin{enumerate*} 
 		\item $R_2 \mapsto R_2/2$
 		\item $R_3 \mapsto R_3 + R_1$
@@ -58,7 +61,7 @@ These are \textbf{not} complete solutions and should not be regarded as such. Th
 		\item $R_1 \mapsto R_1 + \frac{1}{2}R_3$
 		\item $R_1 \mapsto \frac{1}{5}R_1$
 		\item $R_1 \mapsto -\frac{1}{10}R_2$
-	\end{enumerate*}
+	\end{enumerate*} \fi
 	\item Do the following row operations:
 	\begin{enumerate}[nosep] 
 		\item $R_n \mapsto \frac{1}{n}R_n,$
@@ -105,7 +108,7 @@ These are \textbf{not} complete solutions and should not be regarded as such. Th
 	First, do the following operations which do not change the determinant:\\
 	$R_{i+1} \mapsto R_{i+1} -a_1^iR_1$ for $i \in \{1,\ldots,n-1\}$\\~\\
 	Now, expand along the first column, which has only one non-zero element.\\
-	This leaves us with the following $(n-1)\times(n-1)$ determinant:\\
+	This leaves us with the following $(n-1)\times(n-1)$ determinant:
 	\[\det 
 		\begin{bmatrix}
 			a_2 - a_1 & \cdots & a_n - a_1\\
@@ -114,7 +117,23 @@ These are \textbf{not} complete solutions and should not be regarded as such. Th
 			a_2^{n-1} - a_1^{n-1} & \cdots & a_n^{n-1} - a_1^{n-1}
 		\end{bmatrix}
 	\]
+	Now, do the following row operation's \emph{in order}:\\
+	(1) $R_n \mapsto R_n - a_1R_{n-1},$\\
+	(2) $R_{n-1} \mapsto R_{n-1} - a_1R_{n-2},$ \\ 
+	\vdots\\
+	($n$ - 1) $R_2 \mapsto R_2 - a_1R_1.$\\
+	Now, your determinant will look like the following:
+	\[\det 
+		\begin{bmatrix}
+			a_2 - a_1 & \cdots & a_n - a_1\\
+			a_2(a_2  - a_1) & \cdots & a_n(a_2  - a_1)\\
+			\vdots & \ddots & \vdots \\
+			a_2^{n-2}(a_2  - a_1) & \cdots & a_{n}^{n-2}(a_2  - a_1)
+		\end{bmatrix}
+	\]
 	Now, do the obvious step of ``taking out'' $a_{i+1} - a_1$ from each column $C_i.$ ($1 \le i \le n-1$)\\
+	This leaves you with a smaller Vandermonde determinant. Use induction and \emph{get proved}.
+	\iffalse
 	This leaves us with:
 	\[\prod_{1 < i \le n}(a_i - a_1)
 		\det
@@ -143,18 +162,20 @@ These are \textbf{not} complete solutions and should not be regarded as such. Th
 			a_2^{n-1} & \cdots & a_n^{n-2}\\
 		\end{bmatrix}.\]
 	Use induction to conclude the final determinant to be: $\displaystyle\prod_{1 \le i < j \le n}(a_j - a_i).$
+	\fi
 	\item \begin{enumerate} 
 		\item \begin{enumerate}[nosep] 
 			\item Yes. Verify that $\mathbf{0}$ is in this set and that it's closed under scalar multiplication and addition. Easy check.\\
 			Dim: 3, basis: $\{e_1, e_2, e_3\}.$ \hfill (Justify!)
 			\item No. Do inverses exist?
-			\item No. Is it closed under sums? (Consider $(1, 1)$ and $(-1, 1).$)
+			\item No. Is it closed under sums? (Consider $(1, 1, 0, 0)$ and $(-1, 1, 0, 0).$)
 			\item Yes. Verify.\\
-			Dim: 1, basis: $\{e_1 + e_2 + e_3 + e_4\}.$ \hfill (Justify!)
+			Dim: 1, basis: $\{(1, 1, 1, 1)\}.$ \hfill (Justify!)
 			\item No. Note that this is just the union of two lines, like (iii). Give a similar sort of counterexample.
 		\end{enumerate}
 		\item Yes. (Why?)\\
-		Basis: $\{1, \sin x, \cos x\}.$
+		Basis: $\{1, \sin x, \cos x\}.$\\
+		(Prove that this is indeed linearly independent.)
 		\item Yes. Use properties of symmetric matrices and transposes. That is, $(A+B)^T = A^T + B^T$ and $(cA)^T = cA^T.$\\
 		Dim: $\frac{n(n+1)}{2}.$\\
 		Basis: $\{E_{ii} \mid 1 \le i \le n\} \cup \{E_{ij} + E_{ji} \mid 1 \le i < j \le n\}.$\\
@@ -164,12 +185,12 @@ These are \textbf{not} complete solutions and should not be regarded as such. Th
 		To show that it's spanning, try expressing the coefficient of $x$ in terms of those of $x^2,\ldots, x^5.$
 	\end{enumerate}
 	\item It is. Suppose $a_0,\ldots, a_n$ are reals such that
-	\[a_0e^x + a_1xe^x + \cdots + a_nx^n = 0. \qquad (*)\]
+	\[a_0e^x + a_1xe^x + \cdots + a_nx^ne^x = 0. \qquad (*)\]
 	We want to show that the above is possible only if $a_0 = a_1 = \cdots = a_n = 0.$\\
 	Note $(*)$ means that the LHS is $0$ \emph{for all} $x \in \mathbb{R}.$\\
 	As $e^x$ is never $0,$ you may cancel it to conclude that $a_0 + a_1x + \cdots + a_nx^n = 0$ for all $x \in \mathbb{R}.$\\
-	Using this, conclude that $a_0 = a_1 = \cdots = a_n = 0.$\\
-	Thus, the given is linearly independent.
+	Using this, conclude that $a_0 = a_1 = \cdots = a_n = 0.$ \hfill (Do the work!)\\
+	Thus, the given set is linearly independent.
 	\item The subspace will have dimension at most 3. (why?)\\
 	Write the subspaces explicitly in each case - dimensions 0, 1, 2, and 3.\\
 	Argue that each of those above correspond to the things given in the question.  
