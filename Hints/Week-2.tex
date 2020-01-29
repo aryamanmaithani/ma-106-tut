@@ -1,0 +1,177 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{centernot}
+
+\newtheorem{theorem}{Theorem}
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{Tutorial 2}				% change
+\author{Aryaman Maithani}%\\
+%\small TA for D1-T5}
+\date{29th January 2020}		% change
+
+\begin{document}
+\maketitle
+
+\hrulefill
+
+\begin{center}
+	\textsc{Disclaimer}
+\end{center}
+These are \textbf{not} complete solutions and should not be regarded as such. The purpose of this is to basically get you started and you must fill in the gaps. To be more explicit, if what you care about is marks, then just the solutions written here won't suffice.
+
+\hrulefill
+
+\begin{enumerate} 
+	\item Just do it. The following is one of the possible sequence of steps you could do for the Gauss Jordan part:
+	\begin{enumerate*} 
+		\item $R_2 \mapsto R_2/2$
+		\item $R_3 \mapsto R_3 + R_1$
+		\item $R_3 \mapsto R_3 - 2R_2$
+		\item $R_1 \mapsto R_1 + R_2$
+		\item $R_1 \mapsto R_1 + \frac{1}{2}R_3$
+		\item $R_1 \mapsto \frac{1}{5}R_1$
+		\item $R_1 \mapsto -\frac{1}{10}R_2$
+	\end{enumerate*}
+	\item Do the following row operations:
+	\begin{enumerate}[nosep] 
+		\item $R_n \mapsto \frac{1}{n}R_n,$
+		\item $R_i \mapsto R_i - iR_n$ for all $i \in \{1, \ldots, n - 1\}.$
+	\end{enumerate}
+	For example, in the case of $n = 4,$ you should have arrived at the following conclusion:
+	\[\det \begin{bmatrix}
+		1 & 2 & 3 & 4\\
+		2 & 2 & 3 & 4\\
+		3 & 3 & 3 & 4\\
+		4 & 4 & 4 & 4\\
+	\end{bmatrix}
+	= 
+	4\det \begin{bmatrix}
+		0 & 1 & 2 & 3\\
+		0 & 0 & 1 & 2\\
+		0 & 0 & 0 & 1\\
+		1 & 1 & 1 & 1\\
+	\end{bmatrix}\]
+	Write the general case.\\
+	Now, expand along the first column. This is simple to do as it has only one non-zero entry. (Note that you'll get a $(-1)^n$.)\\
+	Thus, you get that the original determinant equals the following expression:
+	\[(-1)^nn\det \begin{bmatrix}
+		1 & 2 & \cdots & n-1\\
+		0 & 1 & \cdots & n-2\\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 1\\
+	\end{bmatrix}.\]
+	Note that the determinant written above is just $1$ as it's a triangular matrix with all diagonal entries $1.$\\
+	Thus, the answer is $(-1)^nn.$
+	\item 
+	\begin{enumerate} 
+		\item Brute it or be clever, doesn't matter.
+		\item I'll list out a series of steps. Try it for $n = 4$ to see what's going on.\\
+		Let the $n \times n$ matrix have $a_1, \ldots, a_n$ as the entries, that is, the matrix is:
+		\[\begin{bmatrix}
+			1 & 1 & \cdots & 1\\
+			a_1 & a_2 & \cdots & a_n\\
+			a_1^2 & a_2^2 & \cdots & a_n^2\\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_1^{n-1} & a_2^{n-1} & \cdots & a_n^{n-1}\\
+		\end{bmatrix}.\]
+	\end{enumerate}
+	First, do the following operations which do not change the determinant:\\
+	$R_{i+1} \mapsto R_{i+1} -a_1^iR_1$ for $i \in \{1,\ldots,n-1\}$\\~\\
+	Now, expand along the first column, which has only one non-zero element.\\
+	This leaves us with the following $(n-1)\times(n-1)$ determinant:\\
+	\[\det 
+		\begin{bmatrix}
+			a_2 - a_1 & \cdots & a_n - a_1\\
+			a_2^2  - a_1^2 & \cdots & a_n^2  - a_1^2\\
+			\vdots & \ddots & \vdots \\
+			a_2^{n-1} - a_1^{n-1} & \cdots & a_n^{n-1} - a_1^{n-1}
+		\end{bmatrix}
+	\]
+	Now, do the obvious step of ``taking out'' $a_{i+1} - a_1$ from each column $C_i.$ ($1 \le i \le n-1$)\\
+	This leaves us with:
+	\[\prod_{1 < i \le n}(a_i - a_1)
+		\det
+		\begin{bmatrix}
+			1 & \cdots & 1\\
+			a_2 + a_1 & \cdots & a_n + a_1\\
+			\vdots & \ddots & \vdots \\
+			a_2^{n-2} + a_2^{n-3}a_1 + \cdots + a_2a_1^{n-3} + a_1^{n-2} & \cdots & a_n^{n-2} + a_n^{n-3}a_1 + \cdots + a_na_1^{n-3} + a_1^{n-2}
+		\end{bmatrix}.
+	\]
+	Now, we perform the following row operations (which don't change the determinant) one after the other:\\
+	(1)	$R_2 \mapsto R_2 - a_1R_1$\\
+	(2) $R_3 \mapsto R_3 - a_1^2R_1 - a_1R_2$\\
+	$\vdots$\\
+	($i$) $R_i \mapsto R_i - a_1^{i-1}R_1 - a_1^{i-2}R_2 -\cdots - a_1R_{i-1}$\\
+	$\vdots$\\
+	($n$ -1) $R_{n-1} \mapsto R_{n-1} - a_1^{n-2}R_1 - a_1^{n-3}R_2 -\cdots - a_1R_{n-2}$\\~\\
+	Note that after each step, one more row becomes like the Vandermonde determinant until we finally get:
+	\[\prod_{1 < i \le n}(a_i - a_1)
+		\det
+		\begin{bmatrix}
+			1 & \cdots & 1\\
+			a_2 & \cdots & a_n\\
+			a_2^2 & \cdots & a_n^2\\
+			\vdots & \ddots & \vdots \\
+			a_2^{n-1} & \cdots & a_n^{n-2}\\
+		\end{bmatrix}.\]
+	Use induction to conclude the final determinant to be: $\displaystyle\prod_{1 \le i < j \le n}(a_j - a_i).$
+	\item \begin{enumerate} 
+		\item \begin{enumerate}[nosep] 
+			\item Yes. Verify that $\mathbf{0}$ is in this set and that it's closed under scalar multiplication and addition. Easy check.\\
+			Dim: 3, basis: $\{e_1, e_2, e_3\}.$ \hfill (Justify!)
+			\item No. Do inverses exist?
+			\item No. Is it closed under sums? (Consider $(1, 1)$ and $(-1, 1).$)
+			\item Yes. Verify.\\
+			Dim: 1, basis: $\{e_1 + e_2 + e_3 + e_4\}.$ \hfill (Justify!)
+			\item No. Note that this is just the union of two lines, like (iii). Give a similar sort of counterexample.
+		\end{enumerate}
+		\item Yes. (Why?)\\
+		Basis: $\{1, \sin x, \cos x\}.$
+		\item Yes. Use properties of symmetric matrices and transposes. That is, $(A+B)^T = A^T + B^T$ and $(cA)^T = cA^T.$\\
+		Dim: $\frac{n(n+1)}{2}.$\\
+		Basis: $\{E_{ii} \mid 1 \le i \le n\} \cup \{E_{ij} + E_{ji} \mid 1 \le i < j \le n\}.$\\
+		Write the above basis explicitly for $n = 2$ and $n = 3$ to see what's happening and then justify.
+		\item Yes.\\
+		Basis: $\{1, x^2-x, x^3-x, x^4-x, x^5-x\}.$\\
+		To show that it's spanning, try expressing the coefficient of $x$ in terms of those of $x^2,\ldots, x^5.$
+	\end{enumerate}
+	\item It is. Suppose $a_0,\ldots, a_n$ are reals such that
+	\[a_0e^x + a_1xe^x + \cdots + a_nx^n = 0. \qquad (*)\]
+	We want to show that the above is possible only if $a_0 = a_1 = \cdots = a_n = 0.$\\
+	Note $(*)$ means that the LHS is $0$ \emph{for all} $x \in \mathbb{R}.$\\
+	As $e^x$ is never $0,$ you may cancel it to conclude that $a_0 + a_1x + \cdots + a_nx^n = 0$ for all $x \in \mathbb{R}.$\\
+	Using this, conclude that $a_0 = a_1 = \cdots = a_n = 0.$\\
+	Thus, the given is linearly independent.
+	\item The subspace will have dimension at most 3. (why?)\\
+	Write the subspaces explicitly in each case - dimensions 0, 1, 2, and 3.\\
+	Argue that each of those above correspond to the things given in the question.  
+\end{enumerate}
+\end{document}
