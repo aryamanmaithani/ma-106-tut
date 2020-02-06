@@ -1,0 +1,165 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{centernot}
+
+\newtheorem{theorem}{Theorem}
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\nullity}{\operatorname{nullity}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{Tutorial 3}				% change
+\author{Aryaman Maithani}
+\date{5th February 2020}		% change
+
+\begin{document}
+\maketitle
+
+\hrulefill
+
+\begin{center}
+	\textsc{Disclaimer}
+\end{center}
+These are \textbf{not} complete solutions and should not be regarded as such. The purpose of this is to basically get you started and you must fill in the gaps. To be more explicit, if what you care about is marks, then just the solutions written here won't suffice.
+
+\hrulefill
+
+\begin{enumerate} 
+	\itemsep1em
+	\item Let $r := \rank T_1.$ Then, $\Im T_1$ has a basis $B$ such that $B = \{v_1, \ldots, v_r\}.$\\
+	Claim. $T_2(B) = \{T_2(v_1), \ldots, T_2(v_r)\}$ is a basis for $\Im T_2 \circ T_1.$\\
+	Note that if we can prove this claim, then we are done. \hfill (Why?)\\~\\
+	%
+	You must show that it is linearly independent and spanning. \\
+	Spanning. Use the fact that $B$ is a basis for $\Im T_1.$ Assume that $y \in \Im T_2 \circ T_1.$ We want to show that $y \in \operatorname{LS} T_2(B).$\\
+	By definition, we have that $y = (T_2 \circ T_1)(x) = T_2(T_1(x))$ for some $x \in U.$ Now, note that $T_1(x) \in \Im T_1,$ by definition of image and hence, $T_1(x)$ can be written as a linear combination of elements of $B.$ Conclude that $y$ can be written as a linear combination of elements of $T_2(B).$\\~\\
+	%
+	Linearly independent. Here is the only place where we need the assumption that $T_2$ is 1-1.\\
+	Suppose that $a_1T_2(v_1) + \cdots + a_nT_2(v_n) = 0$ for some scalars $a_1, \ldots, a_n \in \mathbb{F}.$\\
+	(We have to show that this implies that $a_1 = \cdots = a_n = 0.$)
+	Using linearity, conclude that $T_2(a_1v_1 + \cdots a_nv_n) = 0 = T(0).$\\
+	Using 1-1, conclude that $a_1v_1 + \cdots a_nv_n = 0.$\\
+	Using the fact that $B$ is a basis, conclude that $a_1 = \cdots = a_n = 0.$\\
+	Thus, $T_2(B)$ is linearly independent.\\~\\
+	%
+	\emph{Get proved.}\\~\\
+	\emph{Remark.} We didn't use $T_2$ being 1-1 to show that $T_2(B)$ was spanning. Thus, you may also note that $\Im T_2 \circ T_1 \le \Im T_1$ in general. This intuitively makes sense as it says that the dimension can't increase.
+
+	\hrulefill
+
+	\textbf{Aliter.} Consider the linear transformation $T_2\circ T_1:U \to W.$\\
+	Using the fact that $T_2$ is 1-1, show that $\mathcal{N}(T_2\circ T_1) = \mathcal{N}(T_1).$\\
+	($(T_2\circ T_1)(x) = 0 \iff T_1(x) = 0$?)\\~\\
+	Thus, $\operatorname{nullity}(T_2\circ T_1) = \operatorname{nullity} T_1.$\\
+	Now, note that both $T_1$ and $T_2\circ T_1$ have the same domain and thus, $\dim U = \rank T_1 + \operatorname{nullity} T_1 = \rank(T_2\circ T_1) + \operatorname{nullity}(T_2 \circ T_1)$ gives the answer.
+	\item Check the next solution. This is easier than 3 as you already are given the matrix.
+	\item Fix the standard (ordered) bases $B_1$ and $B_2$ of $\mathbb{R}^5$ and $\mathbb{R}^3,$ respectively.\\
+	With respect to these bases, note that
+	\[M^{B_1}_{B_2}(f) = \begin{bmatrix}
+		0 & 0 & 2 & -2 & 5\\
+		0 & 2 & -8 & 14 & -5\\
+		0 & 1 & 3 & 0 & 1
+	\end{bmatrix}.\]
+	To see how we get this, let me give an example of how I got the third column.\\
+	Take the third basis element of $B_1.$ In this case, it is $(0, 0, 1, 0, 0)^t.$\\
+	Now, we compute $f((0, 0, 1, 0, 0)^t)$ and write it terms of the elements of $B_2.$\\
+	In this case, we get
+	\[f((0, 0, 1, 0, 0)^t) = 2(1, 0, 0)^t  + (-8)(0, 1, 0)^t + 3(0, 0, 1)^t.\]
+	The coefficients $2, -8, 3$ are thus the third column. (Note that the order of elements of $B_2$ matters too.)\\~\\
+	Now, that we have the matrix, reduce it to RCF.\\
+	You'll get that the second and third columns have a pivot. Thus, we take the second and third columns \emph{of the original matrix} to get a basis of the range. \hfill (Why?)\\
+	To get a basis of the null space, we do the standard thing from the theory linear equations where we find the basic solutions.
+	\item Let $T_A, T_B,$ and $T_{AB}$ denote the corresponding linear maps of the matrices $A, B, AB.$ (Make sure you know what these mean, otherwise the rest won't make sense.) \\
+	Note that $T_{AB} = T_A\circ T_B.$\\
+	Using the remark of part 1, we already know that $\rank AB \le \rank B.$\\
+	Also, note that $\Im T_{AB} \subset \Im T_A.$ \hfill (How?)\\
+	Thus, $\rank AB = \rank T_{AB} = \dim \Im T_{AB} \le \rank T_{A}$ and thus, we're done.
+
+	\hrulefill
+
+	\textbf{Aliter.} Note the following observations:
+	\begin{enumerate}[nosep] 
+		\item $\Im (T_A\circ T_B) \subset \Im T_A$
+		\item $\mathcal{N}(T_A\circ T_B) \supset \mathcal{N} (T_B)$
+	\end{enumerate}
+	The above two results are easy to prove. If you're not able to do that, you need to revise the definitions of the spaces involved.\\
+	Now, note that (a) tells us that $\rank (T_A \circ T_B) \le \rank T_A$ and (b) tells us that $\nullity(T_A\circ T_B) \ge \nullity T_B.$\\~\\
+	Use rank-nullity theorem for the second inequality to get $\rank(T_A\circ T_B) \le \rank T_B.$\\
+	Then, use the fact that $\rank(T_A) = \rank A$ and $T_A\circ T_B = T_{AB}$ to get the desired answer. 
+	\item Let $S = \{(x_1, x_2, x_3)^t \in \mathbb{R}^3 : 4x_1 - 3x_2 + x_3 = 0\}.$ This is clearly a subspace.\\
+	For both the parts, we'll need to use a basis for $S,$ so let us find that now itself.\\
+	Claim. $B = \{(3, 4, 0)^t,\;(1, 0, -4)^t\}$ is a basis for $S.$\\
+	\emph{Proof.} Left as an exercise.\\
+	Now, note that $B' = \{(3, 4, 0)^t,\;(1, 0, -4)^t,\;(0, 0, 1)^t\}$ is a basis for $\mathbb{R}^3.$\\
+	Note that the last vector added is clearly not in $S$ and thus, $B'$ is linearly independent. As the only $3$ dimensional subspace of $\mathbb{R}^3$ is $\mathbb{R}^3$ itself, this shows that $B'$ is indeed a basis of $\mathbb{R}^3.$
+	\begin{enumerate} 
+		\item We need to find a $T:\mathbb{R}^3\to\mathbb{R}^3$ such that $\mathcal{N}(T) = S.$\\
+		The idea is to use the fact that any linear map is completely determined by specifying its values at the basis vectors.\\
+		As we want $\mathcal{N}(T) = S,$ we'll map all the elements of $B$ to $(0, 0, 0)^t$ and the remaining element of $B'$ to $(1, 0, 0)^t.$\\
+		Now, we define $T$ for $\mathbb{R}^3$ by \emph{extending the above map linearly.}
+		This gives us the desired map. \hfill (How?)
+		\item Using a similar idea as before, we define $T$ on $\{e_1, e_2, e_3\}$ as:
+		\begin{align*} 
+			e_1 &\mapsto (3, 4, 0)^t\\
+			e_2 &\mapsto (1, 0, -4)^t\\
+			e_3 &\mapsto (1, 0, -4)^t
+		\end{align*}
+		Thus, we are done once again. \hfill (How?)\\
+	\end{enumerate}
+	\emph{Remark.} Do this in a more general setting. That is, let $V$ be any (finite dimensional) vector space and let $S$ be any subspace of $V.$
+
+	\hfill
+
+	\textbf{Aliter.} 
+	\begin{enumerate} 
+		\item Consider the following matrix:
+		\[A = \begin{bmatrix}
+			4 & -3 & 1\\
+			4 & -3 & 1\\
+			4 & -3 & 1\\
+		\end{bmatrix}.\]
+		Consider the associated linear map $T_A:\mathbb{R}^3 \to \mathbb{R}^3.$ \\
+		Claim: $\mathcal{N}(T_A) = S.$\\
+		To prove this, you would have to show that $\mathcal{N}(T_A) \subset S$ and $S\subset \mathcal{N}(T_A).$ This should not be difficult to prove using the definitions. Please do this.\\
+		Thus, $T_A$ is the desired linear transformation.
+		\item Consider the following matrix:
+		\[A = \begin{bmatrix}
+			3 & 1 & 0\\
+			4 & 0 & 0\\
+			0 & -4 & 0\\
+		\end{bmatrix}.\]
+		Consider the associated linear map $T_A:\mathbb{R}^3 \to \mathbb{R}^3.$ \\
+		Claim: $\Im T_A = S.$\\
+		To prove this, note that the first two columns of $A$ form a basis of $S.$ Use the fact that $\Im T_A = \mathcal{C}(A).$\\
+		Thus, $T_A$ is the desired linear transformation.
+	\end{enumerate}
+	\item It's not linear \emph{over} $\mathbb{C}.$ Note that $i T(1, 0) \neq T(i, 0).$\\
+	It \emph{is} linear over $\mathbb{R},$ though. (Simply plug in the definition condition and verify.)
+	% Show that $aT(x_1 + iy_1, x_2 + iy_2) + T(x_1' + iy_1', x_2' + iy_2') = T(ax_1+aiy_1 + x_1'+iy_1', ax_2+aiy_2 + x_2'+iy_2')$
+\end{enumerate}
+\end{document}
