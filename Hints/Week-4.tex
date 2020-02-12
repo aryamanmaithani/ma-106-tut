@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{centernot}
+
+\newtheorem{theorem}{Theorem}
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\nullity}{\operatorname{nullity}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{Tutorial 4}				% change
+\author{Aryaman Maithani}
+\date{12th February 2020}		% change
+
+\begin{document}
+\maketitle
+
+\hrulefill
+
+\begin{center}
+	\textsc{Disclaimer}
+\end{center}
+These are \textbf{not} complete solutions and should not be regarded as such. The purpose of this is to basically get you started and you must fill in the gaps. To be more explicit, if what you care about is marks, then just the solutions written here won't suffice.
+
+\hrulefill
+
+\begin{enumerate} 
+	\itemsep1em
+	\item \begin{enumerate} 
+		\item $\|f\|^2 = \displaystyle\int_{1}^{e} x\log x \text{d}x = \frac{e^2 + 1}{4}.$\\
+		(Use IBP with $\log x$ as ``the first function''.)\\
+		Thus, $\|f\| = \sqrt{\dfrac{e^2 + 1}{4}}.$
+		\item Note that $f$ and $g$ will be orthogonal (by definition) if $\langle f, g\rangle = 0.$\\
+		Thus, $a$ and $b$ must satisfy the following equality:
+		\[\int_{1}^{e} (ax + b)\log x \text{d}x = 0.\]
+		The above gives
+		\[a\left(\frac{e^2 + 1}{4}\right) + b = 0.\]
+		Thus, one such linear function would be $g(x) = 4x - e^2 - 1.$
+	\end{enumerate}
+	\item Recall that $C^1[a, b]$ is the set of functions $f:[a, b] \to \mathbb{R}$ which are differentiable once \emph{and} $f'$ is \emph{continuous}. (Recall from MA 105 that derivative need not be continuous in general.) \\
+	Verify the following for $f, g, g_1, g_2 \in C_0^1[a, b]$ and $c \in \mathbb{R}$:
+	\begin{enumerate}[nosep] 
+		\item $\langle f, g\rangle = \overline{\langle g, f\rangle}.$\\
+		(As the given vector space is a real vector space, we'll have $\overline{\langle g, f\rangle} = \langle g, f\rangle.$)
+		\item $\langle f, g_1 + g_2\rangle = \langle f, g_1\rangle + \langle f, g_2\rangle.$\\
+		This will following by linearity of the derivative and integration operators.
+		\item $\langle f, cg\rangle = c\langle f, g\rangle.$\\
+		Once again, this will follow from the linearities.
+		\item $\langle f, f\rangle \ge 0$ with $\langle f, f\rangle \iff f = 0.$\\
+		The fact that $\langle f, f\rangle \ge 0$ follows easily by the fact that $(f'(x))^2 \ge 0$ for all $x \in [a, b].$\\~\\
+		To show the next part, note that $\displaystyle\int_{a}^{b} (f'(x))^2 \text{d}x = 0 \iff f' = 0.$ (That is, $f'$ is the zero function.) This is \emph{because} $f'$ \emph{is continuous}. \\
+		Note that this continuity is important. Recall from MA 105 that we had seen that the integral of a nonnegative function on a closed interval can be zero even if the function is not identically zero. \\~\\
+		%
+		Now, that we have $f' = 0,$ we get that $f$ is constant on $[a, b].$ This is because the domain is an interval.\\
+		The domain being an interval is important for otherwise, we may have a nonconstant function whose derivative is identically zero.\\~\\
+		%
+		Thus, we get that $f(x) = f(a) = 0$ for all $x \in [a, b].$ In other words, $f = 0,$ the zero function.\\
+		This shows that $\langle f, f\rangle = 0 \implies f = 0.$\\
+		It is obvious that $f = 0 \implies \langle f, f\rangle = 0.$\\
+		Thus, we are done.
+	\end{enumerate}
+	%
+	\item Just do it. Remember to orthonormalise it at the end. You should get:
+	\[\left\{(1, 0, 0, 0), (0, 1, 0, 0), \frac{1}{\sqrt{2}}(0, 0, 1, 1)\right\}.\]
+	%
+	\item (i) $\iff$ (ii) is trivial after observing that $(A^*)^* = A.$\\~\\
+	To show (i) $\iff$ (iii), we first make the following observation for any two matrices $A, B \in M_n(\mathbb{C})$ in general:\\
+	Let $C = A^*B.$ Let $A_i$ be the $i^{\text{th}}$ column of $A$ and $B_j$ the $j^{\text{th}}$ column of $B.$ Then,
+	\[\langle A_i, B_j\rangle = A_i^*B_j = c_{ij},\]
+	where $c_{ij}$ is the $(i, j)^{\text{th}}$ entry of $C.$\\
+	The desired result now follows by considering $B = A.$\\~\\
+	By the same reasoning as before, we get that (ii) $\iff$ (iv).\\~\\
+	Thus, we are done.
+\end{enumerate}
+\end{document}
