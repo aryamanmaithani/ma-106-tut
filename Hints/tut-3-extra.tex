@@ -1,0 +1,284 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{centernot}
+
+\newtheorem{theorem}{Theorem}
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\nullity}{\operatorname{nullity}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{Tutorial 3 extra questions}		% change
+\author{Aryaman Maithani}
+\date{19th February 2020}				% change
+
+\begin{document}
+\maketitle
+
+\begin{center}
+	\emph{For Bernie}
+\end{center}
+
+\hrulefill
+
+\begin{center}
+	\textsc{Disclaimer}
+\end{center}
+These are \textbf{not} complete solutions and should not be regarded as such. The purpose of this is to basically get you started and you must fill in the gaps. To be more explicit, if what you care about is marks, then just the solutions written here won't suffice.
+
+\hrulefill
+
+\begin{enumerate} 
+	\itemsep1em
+	\item Recall the definition of $f_A.$ $f_A(x) := Ax$ for $x \in \mathbb{R}^n.$\\
+	Let $x = \begin{bmatrix}
+		x_1\\
+		\vdots\\
+		x_n
+	\end{bmatrix}.$ Let $A_1, \ldots, A_n$ denote the columns of $A.$ \\
+	Then, note that $Ax = x_1A_1 + \cdots x_nA_n.$\\
+	Use this to conclude that $\mathcal{C}(A) = \operatorname{Range}(f_A).$ \hfill $(*)$\\
+	Now, recall that the rank of a matrix was defined as its column rank. Thus, $\operatorname{column-rank}(A) = \dim \operatorname{Range}(f_A),$ by $(*).$ Also, $\dim \operatorname{Range}(f_A) = \operatorname{rk}f_A$ just follows from the definition of rank of a linear transform.
+	%
+	\item Claim 1. $\mathcal{N}(AB) = \mathcal{N}(B).$\\
+	Proof. It is clear that $\mathcal{N}(B) \subset \mathcal{N}(AB)$ as $Bx = 0 \implies ABx = 0.$ (This is true even without the hypothesis about the invertibility of $A.$)\\
+	Now we show that $\mathcal{N}(AB) \subset \mathcal{N}(B).$\\
+	Suppose $x \in \mathcal{N}(AB).$ Then, $ABx = 0.$ However, as $A$ is invertible, we may multiply both sides with $A^{-1}$ to obtain $Bx = 0,$ as desired.\\
+	Thus, we have proven the claim. It now follows that $\nullity AB = \nullity B.$ Use rank-nullity to conclude.\\~\\
+	Claim 2. $\mathcal{C}(BA) = \mathcal{C}(B).$ \\
+	Proof. It is clear that $\mathcal{C}(B) \supset \mathcal{C}(BA)$ as $(BA)v = B(Av).$ (This is true even without the hypothesis about the invertibility of $A.$)\\
+	Now we show that $\mathcal{C}(BA) \supset \mathcal{N}(B).$\\
+	Note that $Bv = BA(A^{-1}v.$ Use this to conclude.
+	%
+	\item 
+	\begin{enumerate}[label = (\roman*)] 
+		\item (a) Reflexive. $A = I^{-1}AI.$\\
+		(b) Symmetric. $A = P^{-1}BP \iff B = (P^{-1})^{-1} A P^{-1}.$\\
+		(c) Transitive. $A = P^{-1}B^{-1}P$ and $B = Q^{-1}CQ \implies A = (QP)^{-1}C(QP).$\\
+		Conclude.
+		\item Note that from a previous tutorial extra question, we have that $\operatorname{trace}(MN) = \operatorname{trace}(NM).$\\
+		Suppose $A = P^{-1}BP.$ Let $M = P^{-1}B$ and $N = P.$ \\
+		Conclude.
+		\item Use 2.
+	\end{enumerate}
+	\item $A = \begin{bmatrix}
+		1 & 0\\
+		0 & 0\\
+	\end{bmatrix}$ and $B = \begin{bmatrix}
+		0 & 1\\
+		0 & 0\\
+	\end{bmatrix}.$
+	\item Let $T_A, T_B,$ and $T_{AB}$ denote the corresponding linear maps of the matrices $A, B, AB.$ (Make sure you know what these mean, otherwise the rest won't make sense.) \\
+	Note that $T_{AB} = T_A\circ T_B.$\\
+	Using the remark of part 1, we already know that $\rank AB \le \rank B.$\\
+	Also, note that $\Im T_{AB} \subset \Im T_A.$ \hfill (How?)\\
+	Thus, $\rank AB = \rank T_{AB} = \dim \Im T_{AB} \le \rank T_{A}$ and thus, we're done.
+
+	\hrulefill
+
+	\textbf{Aliter.} Note the following observations:
+	\begin{enumerate}[nosep] 
+		\item $\Im (T_A\circ T_B) \subset \Im T_A$
+		\item $\mathcal{N}(T_A\circ T_B) \supset \mathcal{N} (T_B)$
+	\end{enumerate}
+	The above two results are easy to prove. If you're not able to do that, you need to revise the definitions of the spaces involved.\\
+	Now, note that (a) tells us that $\rank (T_A \circ T_B) \le \rank T_A$ and (b) tells us that $\nullity(T_A\circ T_B) \ge \nullity T_B.$\\~\\
+	Use rank-nullity theorem for the second inequality to get $\rank(T_A\circ T_B) \le \rank T_B.$\\
+	Then, use the fact that $\rank(T_A) = \rank A$ and $T_A\circ T_B = T_{AB}$ to get the desired answer. 
+	\item 
+	\begin{enumerate}[label = (\roman*)] 
+		\item Let $B$ be a left inverse of $A.$ Then, we have $BA = I_n.$\\
+		We show that $Ax = 0$ has only the trivial solution.\\
+		To see this, suppose $v$ is a solution of the above. Then, $Av = 0$.\\
+		$\implies B(Av) = 0 \implies (BA)v = 0 \implies v = 0.$\\
+		Thus, $\nullity A = 0$ which gives us that $\rank A = n.$ (Rank-nullity.)\\
+		Thus, if we convert $A$ to its RCF, it will have $n$ pivots and thus, be the identity. Conclude.
+		\item Let $B$ be a right inverse of $A.$ Then, we have $AB = I_n.$\\
+		We show that $\rank A = n$ by showing that $\mathcal{C}(A) = \mathbb{F}^n.$\\
+		To show this, let $x \in \mathbb{F}^n$ be given.\\
+		Then, $x = I_nx = (AB)x = A(Bx).$ Let $Bx = y \in \mathbb{F}^n.$ Thus, $x = Ay$ for some $y \in \mathbb{F}^n$ and thus, $\mathcal{C}(A) = \mathbb{F}^n.$\\
+		Conclude invertibility like before.
+	\end{enumerate}
+	\item Let $g$ denote the inverse of $f : V \to W.$\\
+	Let $a \in \mathbb{F}$ and $x, y \in W.$\\
+	$g(ax + y) = g[af(g(x)) + f(g(y))] = g[f(ag(x) + g(y))],$ this last equality was using linearity of $f.$\\
+	Use, we use that $g(f(v)) = v,$ we get that the expression equals $ag(x) + g(y)$ and thus, $g$ is linear.
+	\item 
+	\begin{enumerate}[label=(\roman*)] 
+		\item Note that $0 \in \mathcal{R}(f).$ Moreover, if $x, y \in \mathcal{R}(f),$ then $x = f(x')$ and $y = f(y')$ for some $x', y' \in V.$ Then, $ax + y = af(x') + f(y') = f(ax' + y').$ Conclude using the fact that $ax' + y' \ in V.$.\\
+		If $u, v \in \mathcal{N}(f),$ then $f(au + v) = af(u) + f(v) = a0 + 0 = 0.$ Clearly, $0 \in \mathcal{N}(f).$ Conclude.
+		\item Let $B = \{v_1, \ldots, v_n\}$ be a basis for $V.$ Show that $f(B) = \{f(v_1), \ldots, f(v_n)\}$ is a spanning set of $\mathcal{R}(f).$\\
+		(There in the next question.)\\
+		Note that the cardinality of a spanning set is $\ge$ the dimension of the vector space. (We can always find a subset of a spanning set which forms a basis.)\\
+		Note that the cardinality of $T(B)$ is $\le n.$ (All the elements $T(v_1), \ldots, T(v_n)$ need not be distinct.)\\
+		Thus, we get that $\dim \mathcal{R}(f) \le n = dim V.$
+		\item This is there in slides. The idea is to consider a basis of $\mathcal{N}(f)$ and extend it to a basis of $V.$ Show that the images of the new vectors added form a basis of the range space.
+	\end{enumerate}
+	\item 
+	\begin{enumerate}[label=(\roman*)] 
+		\item There in slides.
+		\item To show: $\mathcal{R}(T) = L(\{T(\mathbf{u}_1), \ldots, T(\mathbf{u}_n)\}).$\\
+		The $\supset$ inclusion should be clear. If not, reread the definition(s).\\
+		We show $\subset.$ Suppose $\mathbf{v} \in \mathcal{R}(T).$ Then, $\mathbf{v} = T(\mathbf{u})$ for some $\mathbf{u} \in U.$\\
+		As $L\left(\{\mathbf{u}_1, \ldots, \mathbf{u}_n\}\right) = U,$ we know that there exist scalars $\alpha_1, \ldots, \alpha_n$ such that $\mathbf{u} = \alpha_1\mathbf{u}_1 + \cdots + \alpha_n\mathbf{u}_n.$\\
+		Thus, using linearity, we get that $\mathbf{v} = T(\mathbf{u}) = \alpha_1T(\mathbf{u}_1) + \cdots + \alpha_nT(\mathbf{u}_n) \in L\left(\{T(\mathbf{u}_1), \ldots, T(\mathbf{u}_n)\}\right).$
+	\end{enumerate}
+	\item 
+	\begin{enumerate} 
+		\item Let $x_1, \ldots, x_n \in f(S).$ Suppose $\alpha_1x_1 + \cdots \alpha_nx_n = 0 \quad (*)$ for some scalars $\alpha_1, \ldots, \alpha_n.$\\
+		We want to show that the only possibility is that all $a_i$s are $0.$\\
+		Note that $x_i \in f(S)$ implies that $x_i = f(x_i')$ for some $x_i' \in S.$ Thus, we may write $(*)$ as:
+		\[f(\alpha_1x_1' + \cdots + \alpha_nx_n') = 0 = f(0).\]
+		As $f$ is one-to-one, this tells us that $\alpha_1x_1' + \cdots + \alpha_nx_n' = 0.$ However, $S$ is linearly independent and thus, this forces $\alpha_i = 0$ for all $i \in \{1, \ldots, n\}.$
+		\item This follows from 9. (ii).
+		\item This follows from the previous two.
+	\end{enumerate}
+	%
+	\item Note that isomorphism = a linear transformation which is bijective. Also, $Id_V$ is the identity function of $V.$ That is, $Id_V : V \to V$ is defined as $Id_V(v) = v$ for all $v \in V.$\\
+	Thus, (i) clearly implies everything else. (For (iv) and (v), take $g = f^{-1}$ and $h = f^{-1},$ resp.)\\~\\
+	Now, we show that (ii) implies (iii) and (i).\\
+	From 9. (i), we know that $\mathcal{N}(f) = \{0\}.$ Thus, $\nullity f = 0.$ Thus, $\rank f = \dim V,$ by rank-nullity. This tells us that $f$ is onto, as $\mathcal{R}(f)$ is an $n$-dimensional subspace of $V$ where $n = \dim V.$\\
+	As it's onto, it's also a bijection. Thus, we get (i) and (iii).\\~\\
+	Now, we show that (iii) implies (ii) and (i).\\
+	If $f$ is onto, its image has dimension $n = \dim V$. This gives us that $\nullity f = 0.$ Thus, $f$ is one-one. Conclude.\\~\\
+	Now, we show that (iv) implies (ii).\\
+	We want to show that $f$ is injective. Let $x, y \in V$ be such that $f(x) = f(y).$ If we show that this implies $x = y,$ we are done.\\
+	$f(x) = f(y) \implies g(f(x)) = g(f(y)) \implies (g\circ f)(x) = (g\circ f)(y) \implies x = y.$\\~\\
+	Similarly, you can show that (v) implies (iii).\\
+	Thus, we have shown all the equivalences now.
+	%
+	\item This is precisely what 10. (a) is asking.
+	%
+	\item Use rank-nullity.\\
+	Let $n := \dim V = \dim U.$\\
+	$T$ is one-one $\iff$ $\mathcal{N}(T) = \{0\} \iff \nullity T = 0 \iff \rank T = n - 0 = n \iff \Im T = V \iff T$ is onto.\\
+	(Note that I've actually shown ``if and only if''.)
+	%
+	\item Exact tutorial problem.
+	\item We are given that $A$ is the left inverse and $B$ the right inverse of $A.$ By part 6., this tells us that both $A$ and $B$ are invertible. To show that they are the inverses of each other, we must show that $BA = I_n$ as well.\\
+	Since we know that $A$ is invertible, there does exist some matrix $C$ such that $CA = AC = I_n.$ We show that $C = B.$ To see this, note that
+	\[C = CI_n = C(AB) = (CA)B = I_nB = B.\]
+	Thus, $BA = I_n,$ as desired.
+	\item I leave this to you.
+	\item Exact tutorial problem.
+	\item 
+	\begin{enumerate}[label=(\alph*)] 
+		\item 
+		\item 
+		\item For these three, just write the corresponding matrix and do it. Similar to 17 which has been done in tutorials.
+		\item Let us first find the null space of this transform.\\
+		Let $f \in \mathcal{N}(T).$ Then, $T(f) = 0.$ Where the $0$ on the right is the \emph{zero function.}\\
+		Thus, we have $f(x)\sin(x) = 0$ for all $x \in (0, 1).$\\
+		As $\sin$ is nonzero in $(0, 1),$ we may conclude that $f(x) = 0$ for all $x \in (0, 1).$ Thus, $f = 0$ is the only element of the null space. This gives us that the nullity is $0.$\\~\\
+		Now, let us find the range space. Once again, noting that $\sin$ is non-zero in $(0, 1),$ we can show that the range space is in fact the whole of $C(0, 1).$\\
+		Indeed, let $g \in C(0, 1)$ be given. Consider $f(x) := \frac{g(x)}{\sin(x)}$ for $x \in (0, 1).$\\
+		As $g$ and $\sin$ are continuous on $(0, 1)$ and $\sin$ is nonzero, we get that $f:(0, 1)\to\mathbb{R}$ is indeed a well-defined continuous function and thus, $f \in C(0, 1).$ Now, one may check that $T(f) = g.$\\
+		Thus, we have an infinite dimensional vector space as the image, so let's not talk about rank.
+		%
+		\item Let us first find the null space of this transform.\\
+		Let $f \in \mathcal{N}(T).$ Then, $T(f) = 0.$ Where the $0$ on the right is the \emph{zero function.}\\
+		Thus, we have $f'(x)e^x = 0$ for all $x \in (0, 1).$\\
+		As $e^x \neq 0$ for all $x \in (0, 1),$ we get that $f'(x) = 0$ for all $x \in (0, 1).$ Thus, we conclude that $f$ is constant. \hfill (How?)\\
+		Moreover, one can verify that every constant function does indeed belong to the null space of $T.$ Thus, $\mathcal{N}(T)$ is the subspace containing all constant functions. This is a one-dimensional subspace with basis $\{1_{(0, 1)}\}$ where $1_{(0, 1)}$ denotes the constant function $1$ defined on $(0, 1).$ (This is not standard notation and hence, don't use it without defining.)\\~\\
+		Now, we find the range space of $T.$ We claim that $\Im T = C(0, 1).$ Let $g \in C(0, 1)$ be given. We now show that there exist $f \in C^1(0, 1)$ such that $T(f) = g.$\\
+		To show this, define $f:(0, 1) \to \mathbb{R}$ as $f(x) := \displaystyle\int_{0}^{x} g(t)e^{-t} \text{d}t.$\\
+		Note that $f$ indeed belongs to $C(0, 1).$ This follows from the Fundamental Theorem of Calculus (Part I). (The integrand is continuous.)\\
+		Thus, we get that $T(f)(x) = f'(x)e^x = g(x)e^{-x}e^x = g(x).$\\
+		Thus, we are done.\\
+		Like earlier, we have an infinite dimensional vector space as the image, so let's not talk about rank.
+	\end{enumerate}
+	\item Tutorial question.
+	\item Write the matrix in each case, with respect to the standard. Call this $A.$ Then, you'll see that $A$ is invertible. Find its inverse $B.$ Define $f_B:\mathbb{R}^n \to \mathbb{R}^n$ as $f_B(x) = Bx.$ This will be the inverse of $T_i,$ in each case.
+	%
+	\item 
+	\begin{enumerate}[label=(\roman*)] 
+		\item Note that $T$ is not linear if we view it $\mathbb{C}^2$ as a vector space over $\mathbb{C}$ but it is over $\mathbb{R}.$ (Elaborated more in the tut hints PDF.)\\
+		Thus, we write the matrix in case of the latter case. Note that $\mathbb{C}^2$ is a four dimensional vector space over $\mathbb{R}.$ There isn't really a ``standard'' ordered basis. Let's just take $B = \{(1, 0), (0, 1), (i, 0), (0, i)\}.$\\
+		Then, we have $T(1, 0) = (1, 0),$ $T(0, 1) = (0, 1),$ $T(i, 0) = (0, 0), T(0, i) = (0, 0).$ Thus, we get the matrix as:
+		\[M_B^B(T) = \begin{bmatrix}
+			1 & 0 & 0 & 0\\
+			0 & 1 & 0 & 0\\
+			0 & 0 & 0 & 0\\
+			0 & 0 & 0 & 0\\
+		\end{bmatrix}.\]
+		\item This is indeed a linear transform. Verify that. Matrix with respect to $B = \{1, x, x^2, x^3\}$ is:
+		\[M_B^B(T) = \begin{bmatrix}
+			-1 & 0 & 0 & 0\\
+			0 & 2 & 0 & 0\\
+			3 & -3 & 0 & 0\\
+			0 & 0 & 0 & 0\\
+		\end{bmatrix}.\]
+		\item Same basis as above gives:
+		\[M_B^B(T) = \begin{bmatrix}
+			0 & 0 & 0 & 0\\
+			2 & 0 & 0 & 0\\
+			0 & 3/2 & 0 & 0\\
+			0 & 0 & 4/3 & 0\\
+			0 & 0 & 0 & 5/4\\
+		\end{bmatrix}.\]
+		\item Same basis as above gives:
+		\[M_B^B(T) = \begin{bmatrix}
+			0 & 1 & 0 & 0\\
+			0 & 0 & 2 & 0\\
+			0 & 0 & 0 & 3\\
+			0 & 0 & 0 & 0\\
+		\end{bmatrix}.\]
+		The method of finding the matrices are given in the tutorial's hints' PDF. (I might've made a calculation mistake somewhere.)	
+	\end{enumerate}
+	\item (a) We show that $f(\mathcal{R}(g)) \subset \mathcal{R}(g).$\\
+	Let $x \in f(\mathcal{R}(g)).$ If we can show that this implies $x \in \mathcal{R}(g),$ then we are done.\\
+	Now, $x \in f(\mathcal{R}(g))$ means that $x = f(x_1)$ for some $x_1 \in \mathcal{R}(g).$ On the other hand, $x_1 \in \mathcal{R}(g)$ implies that $x_1 = g(x_2)$ for some $x_2 \in V.$ Thus, we get that $x = f(g(x_2))$ for some $x_2 \in V.$ However, note that $f \circ g = g \circ f$ and hence, $x = g(f(x_2)).$ Setting $f(x_2) = y \in V$ shows that $x = g(y)$ for some $y \in V$ and thus, $x \in \mathcal{R}(g).$\\
+	Exercise: Write the above but without all those words.\\~\\
+	(b) We show that $f(\mathcal{N}(g)) \subset \mathcal{N}(g).$ Now, I will do it with fewer words, the point is to just use the definitions given.\\
+	Let $x \in f(\mathcal{N}(g)).$\\
+	$\implies x = f(x_1)$ for some $x_1 \in \mathcal{N}(g).$\\
+	$x_1 \in \mathcal{N}(g) \implies g(x_1) = 0.$\\
+	Now, note that $g(x) = g(f(x_1)) = f(g(x_1)) = f(0) = 0.$\\
+	Thus, $x \in \mathcal{N}(g).$ \hfill $\blacksquare$
+	%
+	\item This is the most interesting question of this PDF.\\
+	Let $\mathbb{F}$ be the field over which $V$ is a vector space. Note that, $\mathbb{F}$ is infinite, as $\mathbb{F}$ is given to be either $\mathbb{R}$ or $\mathbb{C}.$ This is indeed required as the result is not true in the case of finite fields.\\~\\
+	%
+	Let $U_1, \ldots, U_k$ be a finite collection of subspaces as given. We want to show that $U_1 \cup \cdots \cup U_k \neq V.$ We do this via induction.\\~\\
+	\emph{Base case.} If $n = 1,$ then it is clear. Since $\dim U_1 < n,$ it is not possible that $U_1 = V.$\\~\\
+	\emph{Induction hypothesis.} Let $n > 1.$\\
+	Suppose that the given proposition is true for $k < n.$ We now show that it's true for $k = n.$\\~\\
+	\emph{Inductive step.}\\
+	Let us assume that $V = U_1 \cup \cdots \cup U_n$ and arrive at a contradiction.\\
+	(We will show that $U_n \subset U_1 \cup \cdots \cup U_{n-1}$.)\\
+	Let $u \in U_n$ be arbitrary.\\
+	As $U_n$ is a proper subspace of $V,$ we may pick $v \in V \setminus U_n.$\\
+	Let $v_\alpha := u + \alpha v \in V$ for $\alpha \in \mathbb{F}\setminus\{0\}.$\\
+	Note that $v_\alpha$ can never be an element of $U_n.$ Otherwise, we would get that $\frac{1}{\alpha}\left(u + \alpha v - u\right) = v \in U_n.$\\
+	Now, note that $\alpha$ can take infinitely many values. As the union of the spaces is $V,$ by assumption, there is some $U_j$ such that $v_\alpha \in U_j$ for infinitely many $\alpha.$ As noted earlier, we have that $j \neq n.$ Thus, $j \in \{1, \ldots, n-1\}.$\\
+	Now, take $\alpha_1 \neq \alpha_2$ such that $v_{\alpha_1}, v_{\alpha_2} \in U_j.$ As $U_j$ is a vector space, $v_{\alpha_1} - v_{\alpha_2} = (\alpha_1 - \alpha_2)v \in U_j.$ As $\alpha_1 - \alpha_2 \neq 0,$ we may divide by it and conclude that $v \in U_j.$ Now, this also forces that $u \in U_j.$ (Why?)\\
+	Thus, given any $u \in U_n,$ there is some $j \in \{1, \ldots, n-1\}$ such that $u \in U_j.$\\~\\
+	Thus, $U_n \subset U_1 \cup \cdots \cup U_{n-1}$ and this gives us that $V = U_1 \cup \cdots \cup U_n = U_1 \cup \cdots \cup U_{n-1}.$ However, this contradicts our induction hypothesis.\\~\\~\\
+	\emph{Remark.} Note that if we are allowed to take infinitely many subspaces as well, then the union \emph{can} equal $V.$
+\end{enumerate}
+\end{document}
