@@ -1,0 +1,209 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{centernot}
+
+\newtheorem{theorem}{Theorem}
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\nullity}{\operatorname{nullity}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{Tutorial 5}				% change
+\author{Aryaman Maithani}
+\date{19th February 2020}		% change
+
+\begin{document}
+\maketitle
+
+\hrulefill
+
+\begin{center}
+	\textsc{Disclaimer}
+\end{center}
+These are \textbf{not} complete solutions and should not be regarded as such. The purpose of this is to basically get you started and you must fill in the gaps. To be more explicit, if what you care about is marks, then just the solutions written here won't suffice.
+
+\hrulefill
+
+\begin{enumerate} 
+	\item Recall the definition of an eigenvalue.\\
+	We want to find a real number $\lambda$ such that $T_H(v) = \lambda v$ has a non-zero solution for $v.$\\
+	Using the definition, note that $Hv = (I - 2uu^t)v = v - 2u(u^tv) = v - 2\langle u, v\rangle u.$\\
+	(Recall that $\langle u, v\rangle = u^tv.$)\\
+	Now, we make the following two observations for $v \neq 0$:
+	\begin{enumerate}[nosep] 
+		\item If $\langle v, u\rangle = 0,$ then $v$ is an eigenvector with eigenvalue $\lambda = 1.$
+		\item If $v \in \operatorname{span}\{u\}$ then $v$ is an eigenvector with eigenvalue $\lambda = -1.$
+	\end{enumerate}
+	Note that the dimension of the vector space $W = \{v \in \mathbb{R}^n : \langle v, u\rangle = 0\}$ is at least $n - 1.$\\
+	(Since $\{u\}$ is a linearly independent set, you may extend it to a basis $\{u, v_2, \ldots, v_n\}$ of $\mathbb{R}^n.$ Then, use Gram Schmidt to orthogonalise the set and get $n-1$ linearly independent vectors which are orthogonal to $u.$ Note that $\{u\}$ is linearly independent since $\|u\| = 1$ and hence, $u \neq 0$.)\\
+	Moreover, note that $\dim \operatorname{span}\{u\} = 1.$ \hfill (Why?)\\
+	Thus, we already have $n$ linearly independent eigenvectors corresponding to these two eigenvalues. Clearly, there can't be more eigenvalues. Conclude.
+	%
+	\item 
+	\begin{enumerate} 
+		\item Note that $P^{-1}(\lambda I - A)P = \lambda I - A'$ and thus, $\det(\lambda I - A) = \det(\lambda I - A').$ Conclude.
+		\item First we note that if $\mathbf{v} \neq \mathbf{0},$ then $P^{-1}\mathbf{v} \neq \mathbf{0}.$ (Making this note is important as eigenvectors are nonzero by definition.)\\
+		Observe that $A\mathbf{v} = \lambda\mathbf{v} \implies PA'P^{-1}\mathbf{v} = \lambda v \implies A'(P^{-1}\mathbf{v}) = \lambda P^{-1}\mathbf{v}.$\\
+		Conclude.
+	\end{enumerate}
+	\item 
+	\begin{enumerate} 
+		\item \begin{align*} 
+			&0 \text{ is an eigenvalue of }A\\
+			\iff &\det(0I - A) = 0\\
+			\iff &\det(A) = 0\\
+			\iff &A \text{ is not invertible}\\
+			\iff &A \text{ is singular}
+		\end{align*}
+		\item Note that $(\lambda I - A)^t = \lambda I - A^t.$ Use the fact that $\det M = \det M^t$ and conclude.
+		\item Let $A = \begin{bmatrix}
+			1 & 1\\
+			0 & 1
+		\end{bmatrix}$ and $x = [1 \; 0]^t.$ Conclude.
+	\end{enumerate}
+	\item First part.\\
+	Suppose that $T$ did have an eigenvalue. Let $\lambda \in \mathbb{R}$ be an eigenvalue. Then, by hypothesis, there exists a nonzero $f \in C^\infty[0, 1]$ such that $T(f) = \lambda f.$ \\
+	Thus, $\lambda f(x) = \displaystyle\int_{0}^{x} f(t) \text{d}t$ for all $x \in [0, 1].$ Note that we may use Fundamental Theorem of Calculus (Part I) and conclude $\lambda f'(x) = f(x)$ for $x \in (0, 1).$ (Note the open interval.)\\
+	However, since both sides are continuous functions, we have that $\lambda f'(x) = f(x)$ for all $x \in [0, 1].$\\
+	At this point, we note that $\lambda$ cannot be zero, since $f$ is not identically zero.\\
+	Thus, $f'(x) = \frac{1}{\lambda}f(x).$\\
+	We may now multiply with $e^{-x/\lambda}$ to write:\\
+	$e^{x/\lambda}f'(x) - e^{-x/\lambda}\frac{1}{\lambda}f(x) = 0$ or $(e^{-x/\lambda}f(x))' = 0.$\\
+	Thus, $e^{-x/\lambda}f(x) = c$ for some $c \in \mathbb{R}.$ (In fact, $c = f(0)$.)\\
+	However, now one may check that $f(x) = ce^{-x/\lambda}$ does \emph{not} actually satisfy $T(f) = \lambda f.$\\~\\
+	Second part. Let $\lambda \in \mathbb{R}.$ We show that there exists some nonzero $f$ such that $T(f) = \lambda f.$\\
+	Note that $f(x) = e^{\lambda x}$ works.\\~\\
+	(Note that I went via that long route of multiplying with $\exp\left(-\frac{x}{\lambda}\right)$ since I didn't want to divide both sides by $f.$)
+	\item 
+	\begin{enumerate} 
+		\item The given conic can be rewritten as 
+		\[X^TAX = 0, \qquad (*)\] where $X = [x_1 x_2]^T$ and $A = \begin{bmatrix}
+			41 & -12\\
+			-12 & 34\\
+		\end{bmatrix}.$\\
+		One may calculate the eigenvalues of $A$ to be $25$ and $50$ with corresponding unit vectors as $\dfrac{1}{5}\begin{bmatrix}
+		3\\
+		4\\
+		\end{bmatrix}$ and $\dfrac{1}{5}\begin{bmatrix}
+			4\\
+			-3\\
+		\end{bmatrix},$ respectively. (You may also take the negative of these.)\\
+		Thus, setting $U = \dfrac{1}{5}\begin{bmatrix}
+			3 & 4\\
+			4 & -3\\
+		\end{bmatrix}$ gives us that $U^*AU = \begin{bmatrix}
+			25 & 0\\
+			0 & 50\\
+		\end{bmatrix}.$\\
+		Set $X = U\begin{bmatrix}
+			y_1 \\
+			y_2\\
+		\end{bmatrix}$ in $(*)$ to get the transformed equation as $25y_1^2 + 50y_2^2 = 0.$\\
+		Thus, the conic represented is a point.
+		%
+		\item The given conic can be rewritten as 
+		\[X^TAX = 40, \qquad (*)\] where $X = [x_1 x_2]^T$ and $A = \begin{bmatrix}
+			9 & -3\\
+			-3 & 1\\
+		\end{bmatrix}.$\\
+		One may calculate the eigenvalues of $A$ to be $0$ and $10$ with corresponding unit vectors as $\dfrac{1}{\sqrt{10}}\begin{bmatrix}
+		1\\
+		3\\
+		\end{bmatrix}$ and $\dfrac{1}{\sqrt{10}}\begin{bmatrix}
+			3\\
+			-1\\
+		\end{bmatrix},$ respectively. (You may also take the negative of these.)\\
+		Thus, setting $U = \dfrac{1}{\sqrt{10}}\begin{bmatrix}
+			1 & 3\\
+			3 & -1\\
+		\end{bmatrix}$ gives us that $U^*AU = \begin{bmatrix}
+			0 & 0\\
+			0 & 10\\
+		\end{bmatrix}.$\\
+		Set $X = U\begin{bmatrix}
+			y_1 \\
+			y_2\\
+		\end{bmatrix}$ in $(*)$ to get the transformed equation as $0y_1^2 + 10y_2^2 = 40.$\\
+		Thus, the conic represented is a pair of parallel lines.
+		%
+		\item The given conic can be rewritten as 
+		\[X^TAX = 25, \qquad (*)\] where $X = [x_1 x_2]^T$ and $A = \begin{bmatrix}
+			91 & -12\\
+			-12 & 84\\
+		\end{bmatrix}.$\\
+		One may calculate the eigenvalues of $A$ to be $75$ and $100$ with corresponding unit vectors as $\dfrac{1}{5}\begin{bmatrix}
+		3\\
+		4\\
+		\end{bmatrix}$ and $\dfrac{1}{5}\begin{bmatrix}
+			-4\\
+			3\\
+		\end{bmatrix},$ respectively. (You may also take the negative of these.)\\
+		Thus, setting $U = \dfrac{1}{5}\begin{bmatrix}
+			3 & -4\\
+			4 & 3\\
+		\end{bmatrix}$ gives us that $U^*AU = \begin{bmatrix}
+			75 & 0\\
+			0 & 100\\
+		\end{bmatrix}.$\\
+		Set $X = U\begin{bmatrix}
+			y_1 \\
+			y_2\\
+		\end{bmatrix}$ in $(*)$ to get the transformed equation as $75y_1^2 + 100y_2^2 = 25.$\\
+		Thus, the conic represented is an ellipse.
+		%
+		\item The given conic can be rewritten as 
+		\[X^TAX = 10, \qquad (*)\] where $X = [x_1 x_2]^T$ and $A = \begin{bmatrix}
+			0 & 2\\
+			2 & 3\\
+		\end{bmatrix}.$\\
+		One may calculate the eigenvalues of $A$ to be $-1$ and $4$ with corresponding unit vectors as $\dfrac{1}{\sqrt{5}}\begin{bmatrix}
+		-2\\
+		1\\
+		\end{bmatrix}$ and $\dfrac{1}{\sqrt{5}}\begin{bmatrix}
+			1\\
+			2\\
+		\end{bmatrix},$ respectively. (You may also take the negative of these.)\\
+		Thus, setting $U = \dfrac{1}{\sqrt{5}}\begin{bmatrix}
+			-2 & 1\\
+			1 & 2\\
+		\end{bmatrix}$ gives us that $U^*AU = \begin{bmatrix}
+			-1 & 0\\
+			0 & 4\\
+		\end{bmatrix}.$\\
+		Set $X = U\begin{bmatrix}
+			y_1 \\
+			y_2\\
+		\end{bmatrix}$ in $(*)$ to get the transformed equation as $-y_1^2 + 4y_2^2 = 10.$\\
+		Thus, the conic represented is a hyperbola.
+	\end{enumerate}
+\end{enumerate}
+
+\hrulefill
+
+That brings us to the end of this tutorial and in turn, this course. Hope you had fun. See you next course.
+\end{document}
