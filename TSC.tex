@@ -1,0 +1,607 @@
+\documentclass[dvipsnames]{beamer}
+% \mode<presentation>{}
+% \usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools, mathrsfs}
+
+% \usepackage{enumitem}
+\setbeamertemplate{theorems}[numbered]
+\title{Linear Algebra TSC}
+\author[Aryaman Maithani]{\texorpdfstring{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/tuts/ma-106}}{Aryaman Maithani}}
+\date{Spring 2022}
+\institute{IIT Bombay}
+\usetheme{Madrid}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+% \usepackage{tikz-cd}
+\usepackage{commands}
+\newcommand{\TT}{\mathsf{T}}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\adj}{adj}
+\hypersetup{colorlinks=true}
+% \usepackage{graphicx}
+% \usepackage{soul}
+
+
+% for getting bold ----------
+\DeclareFontShape{OT1}{cmss}{b}{n}{<->ssub * cmss/bx/n}{}
+% --------------------------
+
+% \usepackage{tikz}
+% \usetikzlibrary{topaths,calc}
+% \usepackage{caption}
+% \usepackage{subcaption}
+% \usepackage{pgfplots}  
+% \pgfplotsset{compat=1.17}
+% \usepackage{cancel}
+% \usepgfplotslibrary{polar}   
+% \usepgflibrary{shapes.geometric}  
+% \usetikzlibrary{calc}  
+% \pgfplotsset{posQuad/.append style={grid=both, xlabel={$x$}, ylabel={$y$}, line width=2pt, mark size=3pt,draw=NordWhite}}
+
+% \tikzset{
+%     invisible/.style={opacity=0},
+%     visible on/.style={alt={#1{}{invisible}}},
+%     alt/.code args={<#1>#2#3}{%
+%       \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}%
+%   }
+% }
+
+% \newcommand\mynum[1]{%
+%   \usebeamercolor{enumerate item}%
+%   \tikzset{beameritem/.style={circle,inner sep=0,minimum size=2ex,text=enumerate item.bg,fill=enumerate item.fg,font=\footnotesize}}%
+%   \tikz[baseline=(n.base)]\node(n)[beameritem]{#1};%
+% }
+
+% \makeatletter
+% \newenvironment<>{proofs}[1][\proofname]{%
+%     \par
+%     \def\insertproofname{#1\@addpunct{.}}%
+%     \usebeamertemplate{proof begin}#2}
+%   {\usebeamertemplate{proof end}}
+% \makeatother
+
+% \setbeamercolor{footline}{fg=brown}
+% \setbeamerfont{footline}{series=\bfseries}
+% \addtobeamertemplate{navigation symbols}{}{%
+%     \usebeamerfont{footline}%
+%     \usebeamercolor[fg]{footline}%
+%     \hspace{1em}%
+%     [\insertframenumber/\inserttotalframenumber]
+% }
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{caution}[thm]{Caution}
+\newtheorem*{ques}{Question}
+\newtheorem{rem}[thm]{Remark}
+% \newtheorem*{fac}{Fact}
+% \newtheorem*{ex}{Example}
+
+\let\subset\subseteq
+\let\supset\supseteq
+\let\ge\geqslant
+\let\le\leqslant
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Table of Contents}
+%     \tableofcontents
+% \end{frame}
+
+\section{Matrices}
+
+\begin{frame}{Matrices}
+    We know what a matrix is. What a column (or row) matrix is. When (and how) we can add and multiply two matrices. What the transpose of a matrix is. \pause
+
+    A matrix is \deff{symmetric} if $A^{\TT} = A$ and \deff{skew-symmetric} if $A^{\TT} = -A$. \pause
+
+    If $\mathbf{v}$ and $\mathbf{w}$ are column vectors, then their dot product is given by $\mathbf{v}^{\TT} \mathbf{w}$. \pause
+
+    A square matrix $A$ is called \deff{invertible} if there exists a matrix $B$ such that $AB = BA = \mathbf{I}$. \pause
+
+    \vspace{2cm}
+
+    \begin{tcolorbox}
+        \begin{center}
+            End of section.
+        \end{center}
+    \end{tcolorbox}
+\end{frame}
+
+\section{EROs, ERMs, RREFs, and more}
+
+\begin{frame}{Linear system}
+    Consider $m$ linear equations in $n$ variables $x_{1}, \ldots, x_{n}$: \pause
+    \begin{align*} 
+        a_{11} x_{1} + a_{12} x_{2} + \cdots + a_{1n} x_{n} &= b_{1} \\
+        a_{21} x_{1} + a_{22} x_{2} + \cdots + a_{2n} x_{n} &= b_{2} \\
+        \vdots & \\
+        a_{m1} x_{1} + a_{m2} x_{2} + \cdots + a_{mn} x_{n} &= b_{m}.
+    \end{align*} \pause
+    Making the obvious matrices out of the `$a_{ij}$'s, `$x_{i}$'s, and `$b_{i}$'s, we can put the above in matrix form as
+    \begin{equation*} 
+        A \mathbf{x} = \mathbf{b},
+    \end{equation*} \pause
+    where $A$ is of size $m \times n$, $\mathbf{x}$ of size $n \times 1$, and $\mathbf{b}$ of size $m \times 1$. \pause
+
+    We have the \deff{augmented matrix} defined by \pause $A^{+} \vcentcolon= [A \mid \mathbf{b}]$, which completely captures the whole system.
+\end{frame}
+\begin{frame}{Elementary row operations}
+    There are three obvious things one can do without changing the set of solutions:
+    \begin{enumerate}[<+->]
+        \item Interchanging the order of two equations.
+        \item Multiplying an equation by a scalar and adding it to some \underline{other} equation of the system.
+        \item Multiplying an equation by a \underline{nonzero} number.
+    \end{enumerate} \pause
+    Corresponding to each of the operations above, there are obvious row operations that can be performed on $A^{+}$, \pause called the \deff{elementary row operations (EROs)}.
+\end{frame}
+\begin{frame}{EROs and ERMs}
+    The three EROs on the previous slide can be applied on the identity matrix $\mathbf{I} = I_{m \times m}$. \pause \newline 
+    Pick any ERO of your liking. \pause Let $E$ be the matrix obtained after applying that ERO on $\mathbf{I}$. \newline
+    Now, let $A$ be an arbitrary $m \times n$. \pause Then,
+    \begin{center}
+        $EA$ is the same as applying \emph{that} ERO on $A$. \pause
+    \end{center}
+    What this means is that one can perform row operations by pre-multiplying  certain (square) matrices. \pause
+
+    A matrix that is obtained by performing an ERO on $\mathbf{I}$ is called an \deff{elementary row matrix (ERM)}. \pause
+
+    \emph{Note}: All elementary row matrices are invertible. \pause \hfill (Why?)
+\end{frame}
+\begin{frame}{(R)REF}
+    \begin{defn}
+         An $m \times n$ matrix is said to be in \deff{row echelon form (REF)} if \newline
+         each row \underline{starts} with \underline{strictly} more zeroes than the previous row. \pause
+
+         The first nonzero element in a nonzero row is called the \deff{pivot} of that row.
+     \end{defn} \pause
+    $\begin{bmatrix}
+        \boxed{3} & 1 & 0 & 0 \\
+        0 & \boxed{1} & 1 & 1
+    \end{bmatrix}$ \pause \textbf{is} in REF even though the first row has more zeroes \underline{in total}.
+
+    \begin{defn}
+        A matrix in REF is said to be in \deff{reduced REF (RREF)} if further: \pause (i) all pivots are 1, \pause and (ii) the entries above each pivot is $0$.
+    \end{defn} \pause
+
+    The matrix above is not in RREF. \pause It violates \emph{both} the conditions.
+\end{frame}
+\begin{frame}{Gauss}
+    \begin{thm}
+        Given any $m \times n$ matrix $A$, one can perform elementary row operations on $A$ to convert it into RREF. \pause
+
+        Equivalently, there exists elementary roe matrices $E_{1}, \ldots, E_{N}$ such that
+        \begin{equation*} 
+            E_{N} \cdots E_{1} A
+        \end{equation*}
+        is in RREF. \pause
+
+        Furthermore, the RREF is unique.
+    \end{thm} \pause
+    \emph{Note}: The same matrix can be converted to many distinct REFs. \pause
+
+    It is fairly straightforward to perform EROs to turn $A$ into an REF (and further an RREF).
+\end{frame}
+\begin{frame}{Application of Gauss to solving linear equations}
+    For this application, it suffices to turn matrices into REF. \pause
+
+    We take the augmented matrix and convert it into REF using EROs. \pause Note that this does not change the solution set, so we might as well assume that $A^{+} = [A \mid \mathbf{b}']$ is in REF. \pause 
+    Note that in doing so, we also have that $A$ is in REF. \pause
+
+    If the numbers of zero rows of $A$ and $A^{+}$ are the same, then the system is \deff{consistent}, i.e., has a solution. \pause
+    
+    The set of solutions can now be found directly by back-substitution. \pause You will see that the variables corresponding to columns not having a pivot are ``free''. \pause (Do an example to see what is happening.) 
+\end{frame}
+\begin{frame}{Application of Gauss to finding inverses}
+    \begin{thm}
+        Let $A$ be a \underline{square} matrix. \pause $A$ is invertible iff the RREF of $A$ is $\mathbf{I}$. \pause
+        Equivalently, $A$ can be written as a product of elementary row matrices.
+    \end{thm} \pause
+
+    \textbf{Algorithm for finding inverse:} \pause
+    \begin{enumerate}[<+->]
+        \item Write the matrices $A$ and $\mathbf{I}$ side-by-side.
+        \item Performs EROs on $A$ to convert $A$ into its RREF. Simultaneously perform those EROs on $\mathbf{I}$ (in the same order).
+        \item At the end -- if $A$ were invertible -- the left matrix has become $\mathbf{I}$ and the right matrix is the desired inverse of $A$.
+    \end{enumerate} \pause
+
+    \emph{Note}: The above algorithm does not require prior knowledge that $A$ is invertible. If you perform it on a non-invertible matrix, you'll end up finding out that it is not invertible.
+\end{frame}
+
+\section{Vector spaces}
+
+\begin{frame}{Vector subspaces}
+    \begin{defn}
+        A subset $V \subset \mathbb{R}^{n}$ is called a \deff{(real) vector subspace} if
+        \begin{enumerate}[<+->]
+            \item $\mathbf{0} \in V$,
+            \item $a \in \mathbb{R}$ and $\mathbf{v} \in V$ implies $a \mathbf{v} \in V$,
+            \item $\mathbf{v}$, $\mathbf{w} \in V$ implies $\mathbf{v} + \mathbf{w} \in V$.
+        \end{enumerate}
+    \end{defn} \pause
+
+    One can replace $\mathbb{R}$ above with $\mathbb{C}$ everywhere to get the notion of a \deff{complex vector subspace}. \pause To consider both at once, we shall use the symbol $\mathbb{K}$ -- which could stand for either $\mathbb{R}$ or $\mathbb{C}$.
+
+    From this point on, $V$ will always denote a vector subspace of $\mathbb{K}^{n}$ (for some $n$). \pause
+
+    Note that if $a_{1}, \ldots, a_{k} \in \mathbb{K}$ and $\mathbf{v}_{1}, \ldots, \mathbf{v}_{k} \in V$, then $a_{1} \mathbf{v}_{1} + \cdots a_{k} \mathbf{v}_{k}$ is also an element of $V$. \pause This element is called a \deff{linear combination} of the $\mathbf{v}_{i}$.
+\end{frame}
+\begin{frame}{Linear span}
+    We can create vector subspaces out of linear combinations. \pause
+
+    Suppose that $\mathbf{w}_{1}, \ldots, \mathbf{w}_{k} \in \mathbb{K}^{n}$ are arbitrary elements. \pause Then, the set of all linear combinations
+    \begin{equation*} 
+        V \vcentcolon= \{a_{1} \mathbf{w}_{1} + \cdots a_{k} \mathbf{w}_{k} : a_{1}, \ldots, a_{k} \in \mathbb{K}\}
+    \end{equation*}
+    is a vector subspace. \pause 
+
+    We write $V = \spn\{\mathbf{w}_{1}, \ldots, \mathbf{w}_{k}\}$ and say that $V$ is \deff{spanned} (or \deff{generated}) by $\mathbf{w}_{1}, \ldots, \mathbf{w}_{k}$.
+\end{frame}
+\begin{frame}{Linear independence}
+    \begin{defn}
+        Vectors $\mathbf{v}_{1}, \ldots, \mathbf{v}_{k} \in \mathbb{K}^{n}$ are said to be \deff{linearly dependent} \pause if there exist scalars $a_{1}, \ldots, a_{k} \in \mathbb{K}$ \underline{not all zero} such that
+        \begin{equation*} 
+            a_{1} \mathbf{v}_{1} + \cdots + a_{k} \mathbf{v}_{k} = \mathbf{0}.
+        \end{equation*} \pause
+
+        Else, they are said to be \deff{linearly independent}.
+    \end{defn} \pause
+
+    Rephrasing slightly, linear independence means that
+    \begin{equation*} 
+        a_{1} \mathbf{v}_{1} + \cdots + a_{k} \mathbf{v}_{k} = \mathbf{0} \Rightarrow a_{1} = \cdots = a_{k} = 0.
+    \end{equation*} 
+\end{frame}
+\begin{frame}{Basis}
+    \begin{defn}
+        Let $V \subset \mathbb{K}^{n}$ be a vector subspace. \pause A (finite) subset $B \subset V$ is said to be a \deff{basis} for $V$ if: \pause
+        \begin{enumerate}[<+->]
+            \item $B$ is linearly independent,
+            \item $V = \spn(B)$.
+        \end{enumerate}
+    \end{defn} \pause
+    \emph{Note}: One can define linear independence and span for an infinite subset also. Then the ``(finite)'' above can be dropped. \pause
+
+    \begin{thm}
+        Let $V$ be any subspace of $\mathbb{K}^{n}$. \pause \newline
+        Then, $V$ has a basis $B$. \pause If $B'$ is any other basis of $V$, then $B$ and $B'$ have the same size. \pause \newline
+        The size of $B$ is called the \deff{dimension} of $V$, denoted $\dim(V)$.
+    \end{thm}
+\end{frame}
+\begin{frame}{Linear independence, spanning, basis}
+    Linear algebra is nice, it works like you would intuitively want it to. Let $V$ be a vector subspace of dimension $d$, and let $S \subset V$. We have the following. \pause
+    \begin{enumerate}[<+->]
+        \item If $S$ is linearly independent, then $\md{S} \le d$. \pause \newline
+        If $\md{S} = d$, then $S$ is a basis. \pause \newline
+        Else, you can extend $S$ to a basis of $V$. \pause
+        \item If $V = \spn(S)$, then $\md{S} \ge d$. \pause \newline
+        If $\md{S} = d$, then $S$ is a basis. \pause \newline
+        Else, you can throw out vectors of $S$ to make a basis of $V$.
+    \end{enumerate}
+    \pause
+    The above shows that if two of the following three properties are satisfied by $S$, then so is the third property (and hence, $S$ is a basis): \pause
+    \begin{enumerate}[<+->]
+        \item $S$ is linearly independent.
+        \item $S$ is of size $d$.
+        \item $S$ spans $V$.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Linear independence, spanning, basis}
+    Here is another observation from the previous slide: \pause If $V$ is spanned by $k$ vectors, then $\dim(V) \le k$. \pause This means that any $k + 1$ vectors in $V$ are linearly dependent. \pause
+
+    The above was the \emph{First Fundamental Lemma in linear algebra}.
+\end{frame}
+
+\section{Ranks of a matrix}
+\begin{frame}{Column and row ranks}
+    Let $A$ be an $m \times n$ matrix. \pause 
+
+    The columns of $A$ can be interpreted as elements of $\mathbb{K}^{m}$, \pause their linear span is called the \deff{column space of $A$}. \pause \newline
+    Similarly, we have the obvious \deff{row space of $A$} -- this is a subspace of $\mathbb{K}^{n}$. \pause
+
+    The dimension of the column space of $A$ is the \deff{column rank of $A$}, and the \deff{row rank of $A$} is the... \pause
+
+    \begin{thm}
+        Row rank = Column rank = number of pivots in any REF.
+    \end{thm}
+
+    The common quantity above is called the \deff{rank} of $A$.
+\end{frame}
+\begin{frame}{EROs, spaces, and ranks}
+    \begin{thm}
+        Let $A$ be an $m \times n$ matrix. Performing EROs on $A$ does not change the following: \pause
+        \begin{enumerate}[<+->]
+            \item Row space.
+            \item Linear independence of columns. \pause For example, if columns $1$, $3$, $4$ were linearly (in)dependent, then they continue to be so. \pause
+        \end{enumerate}
+    \end{thm}
+
+    Note that changing ``row'' and ``column'' above is disastrous! \pause If you are asked to find a basis for column space of $A$, \pause you should convert $A$ to REF, find the pivotal columns there, \pause and then pick the columns \textbf{from the original matrix}. \pause
+
+    On the other hand, if you are asked to find a basis for the row space, then you pick the nonzero rows from any REF of $A$.
+\end{frame}
+\begin{frame}{Rank-nullity}
+    Given an $m \times n$ matrix, we have the following subspace of $\mathbb{K}^{n}$, called the \deff{null space of $A$}: \pause
+    \begin{equation*} 
+        \mathcal{N}(A) \vcentcolon= \{\mathbf{x} \in \mathbb{K}^{n} : A \mathbf{x} = \mathbf{0}\}.
+    \end{equation*} \pause
+    The \deff{nullity of $A$} is defined as $\dim(\mathcal{N}(A))$. \pause
+
+    \begin{thm}[Rank-nullity theorem]
+        $\rank(A) + \nullity(A) = n$.   
+    \end{thm} \pause
+
+    Note that $n$ is the number of \emph{columns}.
+\end{frame}
+\begin{frame}{A remark on null space}
+    Let $A \in \mathbb{K}^{m \times n}$ and $\mathbf{b} \in \mathbb{K}^{m}$. Consider the system
+    \begin{equation} \label{eq:01} \tag{$\ast$}
+        A \mathbf{x} = \mathbf{b}.
+    \end{equation}
+
+    \emph{Suppose} that (\ref{eq:01}) has a particular solution $\mathbf{x}_{0}$. \emph{Then}, the complete set of solutions of (\ref{eq:01}) is $\mathbf{x}_{0} + \mathcal{N}(A)$. \pause
+
+    Moreover, note that (\ref{eq:01}) has a solution iff $\mathbf{b}$ is in the column space of $A$. \pause
+
+    True/False: Suppose $A \mathbf{x} = \mathbf{0}$ has infinitely many solutions, and fix $\mathbf{b} \in \mathbb{K}^{m}$. Then, $A \mathbf{x} = \mathbf{b}$ also has infinitely many solutions. \pause
+
+    What if ``infinitely many'' is replaced with ``unique''?
+\end{frame}
+\begin{frame}{Determinants}
+    We know what the determinant of a matrix is. Furthermore, we know its basic properties: it is multilinear, alternating, and $\det(\mathbf{I}) = 1$. \pause Moreover, $\det(AB) = \det(A)\det(B)$ and $\det(A) = \det(A^{\TT})$. \pause
+
+    \begin{thm}[Determinantal rank]
+        Let $A$ be an $m \times n$ matrix. \pause Let $k$ be such that $A$ has a $k \times k$ submatrix with nonzero determinant \pause but every $(k + 1) \times (k + 1)$ submatrix has zero determinant. \pause
+
+        Then, $k = \rank(A)$.
+    \end{thm} \pause
+
+    In other words, the rank is the size of the largest square submatrix with nonzero determinant. \pause Note that there may still be \emph{some} $k \times k$ submatrices with zero determinant.
+\end{frame}
+\begin{frame}{Characterisations of invertibility}
+    Let $A$ be an $n \times n$ \underline{square} matrix. TFAE: \pause
+    \begin{enumerate}[<+->]
+        \item $A$ is invertible.
+        \item $\rank(A) = n$.
+        \item $\nullity(A) = 0$.
+        \item $A \mathbf{x} = \mathbf{0}$ has a unique solution, namely $\mathbf{x} = 0$.
+        \item $\det(A) \neq 0$.
+        \item Columns (or rows) of $A$ are linearly independent.
+        \item RREF of $A$ is $\mathbf{I}$.
+        \item $A$ is a product of ERMs.
+    \end{enumerate} \pause
+
+    True/False: Let $A$ be a square matrix such that $A \mathbf{x} = \mathbf{0}$ has a unique solution, and fix $\mathbf{b} \in \mathbb{K}^{n}$. Does $A \mathbf{x} = \mathbf{b}$ also have a unique solution?
+\end{frame}
+\begin{frame}{Applications of determinants}
+    \begin{thm}
+        Let $\mathbf{v}_{1}, \ldots, \mathbf{v}_{k} \in \mathbb{R}^{n}$ be vectors. \pause Construct the matrix $G$ whose $(i, j)$-th entry is the dot product $\mathbf{v}_{i}^{\TT} \mathbf{v}_{j}$. \pause Then, the $k$ vectors are linearly independent iff $\det(G) \neq 0$.
+    \end{thm} \pause
+
+    Recall that the \deff{adjugate} of a square matrix $A$ is the transpose of the cofactor matrix, and is denoted by $\adj(A)$. \pause We have $\adj(A) A = \det(A) \mathbf{I}$. \pause If $A$ is invertible, then $A^{-1} = \frac{1}{\det(A)} \adj(A)$. \pause In this case, the unique solution of $A \mathbf{x} = \mathbf{b}$ is given by
+    \begin{equation*} 
+        \mathbf{x} = \frac{(\adj(A)) \mathbf{b}}{\det(A)}.
+    \end{equation*}
+    The above is essentially Cramer's rule.
+\end{frame}
+
+\section{Inner products}
+
+\begin{frame}{Inner products}
+    \begin{defn}
+        Let $V \subset \mathbb{K}^{n}$ be a vector subspace. \pause A function $\langle \cdot, \cdot \rangle : V \times V \to \mathbb{K}$ is called an \deff{inner product} if \pause
+        \begin{enumerate}[<+->]
+            \item $\langle \mathbf{v}, \mathbf{u} + \mathbf{w}\rangle = \langle \mathbf{v}, \mathbf{u}\rangle + \langle \mathbf{v}, \mathbf{w}\rangle$,
+            \item $\langle \mathbf{v} + \mathbf{w}, \mathbf{u}\rangle = \langle \mathbf{v}, \mathbf{u}\rangle + \langle \mathbf{w}, \mathbf{u}\rangle$,
+            \item $\langle \alpha \mathbf{v}, \mathbf{w}\rangle = \alpha \langle \mathbf{v}, \mathbf{w}\rangle = \langle \mathbf{v}, \overline{\alpha} \mathbf{w}\rangle$,
+            \item $\langle \mathbf{v}, \mathbf{w}\rangle = \overline{\langle \mathbf{w}, \mathbf{v}\rangle}$,
+            \item $\langle \mathbf{v}, \mathbf{v}\rangle \ge 0$,
+            \item $\langle \mathbf{v}, \mathbf{v}\rangle = 0 \Rightarrow \mathbf{v} = \mathbf{0}$.
+        \end{enumerate} \pause
+
+        The \deff{norm} of $\mathbf{v}$ is defined as $\|v\| \vcentcolon= \sqrt{\langle \mathbf{v}, \mathbf{v}\rangle}$.
+    \end{defn} \pause
+
+    \begin{thm}[Parallelogram law]
+        $\|\mathbf{v}_{1} + \mathbf{v}_{2}\|^{2} + \|\mathbf{v}_{1} - \mathbf{v}_{2}\|^{2} = 2(\|\mathbf{v}_{1}\|^{2} + \|\mathbf{v}_{2}\|^{2})$.
+    \end{thm} \pause
+    Similarly, one has Pythagoras theorem and Cauchy Schwarz: $\md{\langle \mathbf{v}_{1}, \mathbf{v}_{2}\rangle} \le \|\mathbf{v}_{1}\| \cdot \|\mathbf{v}_{2}\|$.
+\end{frame}
+\begin{frame}{Gram Schmidt}
+    Given a finite set $\{\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\}$ in an inner product space $V$, \pause we wish to find an orthogonal subset $\{\mathbf{w}_{1}, \ldots, \mathbf{w}_{n}\}$ such that \pause
+    \begin{equation*} 
+        \spn\{\mathbf{v}_{1}, \ldots, \mathbf{v}_{k}\} = \spn\{\mathbf{w}_{1}, \ldots, \mathbf{w}_{k}\}
+    \end{equation*}
+    for all $1 \le k \le n$. \pause
+
+    The idea is to do the following:  \pause
+    \begin{enumerate}
+        \item First define $\mathbf{w}_{1} \vcentcolon= \mathbf{v}_{1}/\|\mathbf{v}_{1}\|$. \pause
+        \item Then, define $\mathbf{x}_{2} \vcentcolon= \mathbf{v}_{2} - \langle \mathbf{v}_{2}, \mathbf{w}_{1}\rangle \mathbf{w}_{1}$. \newline \pause
+        In other words, subtract the component of $\mathbf{v}_{2}$ in the direction of $\mathbf{w}_{1}$. \newline \pause
+        Now, set $\mathbf{w}_{2} \vcentcolon= \mathbf{x}_{2}/\|\mathbf{x}_{2}\|$. \pause
+        \item Next, define $\mathbf{x_{3}} \vcentcolon= \mathbf{v}_{3} - \langle \mathbf{v}_{3}, \mathbf{w}_{2}\rangle \mathbf{w}_{2} - \langle \mathbf{v}_{3}, \mathbf{w}_{1}\rangle \mathbf{w}_{1}$. \newline \pause
+        Thus, we are subtracting the component in the directions of $\mathbf{w}_{1}$ and $\mathbf{w}_{2}$ both. \newline \pause
+        Set $\mathbf{w}_{3} \vcentcolon= \mathbf{x}_{3}/\|\mathbf{x}_{3}\|$. \newline
+        Continue similarly.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Gram Schmidt}
+    The earlier process will work fine if $\{\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\}$ is linearly independent. \pause In this case, the set obtained $\{\mathbf{w}_{1}, \ldots, \mathbf{w}_{n}\}$ will be ortho\underline{normal}. \pause
+    
+    Otherwise, we will get that some of the $\mathbf{x}_{i}$ in the process are $0$. In that case, we simply discard those. \pause
+
+    The benefit of the above is that given any basis $B$ of an inner product space $V$, we can get an orthonormal basis $B'$. \pause
+
+    \begin{thm}
+        Any orthogonal set of nonzero vectors is linearly independent. \pause \newline
+        In particular, any orthonormal set is linearly independent.
+    \end{thm}
+\end{frame}
+
+\section{Eigenvectors and eigenvalues}
+\begin{frame}{Definitions}
+    \begin{defn}
+        Let $A$ be an $n \times n$ matrix. \pause Let $\mathbf{v} \in \mathbb{K}^{n}$ be a \underline{nonzero} vector such that \pause
+        \begin{equation*} 
+            A \mathbf{v} = \lambda \mathbf{v}
+        \end{equation*}
+        for some $\lambda \in \mathbb{K}$. \pause
+
+        Then, $\mathbf{v}$ is said to be an \deff{eigenvector} of $A$ with \deff{eigenvalue} $\lambda$.
+    \end{defn} \pause
+
+    \begin{prop}
+        $\lambda$ is an eigenvalue of $A$ iff $\det(A - \lambda I) = 0$.
+    \end{prop} \pause
+
+    The polynomial $p(x) = \det(A - xI)$ is called the \deff{characteristic polynomial} of $A$. \pause The above proposition says that the eigenvalues of $A$ are precisely the roots of the characteristic polynomial.
+\end{frame}
+\begin{frame}{Multiplicities}
+    \begin{defn}
+        Let $\lambda$ be an eigenvalue of $A$, and let $p(x)$ be the characteristic polynomial of $A$. \pause \newline
+        Then, we can write $p(x) = (x - \lambda)^{m} q(x)$ for some $m \ge 1$ with $q(\lambda) \neq 0$. \pause \newline
+        $m$ is called the \deff{algebraic multiplicity} of $\lambda$. \pause
+
+        The \deff{geometric multiplicity} of $\lambda$ is defined as $\nullity(A - \lambda I)$.
+    \end{defn}
+
+    \begin{thm}
+        Let $\lambda$ be an eigenvalue of an $n \times n$ matrix $A$. Let $g$ and $m$ denote the geometric and algebraic multiplicities of $\lambda$ respectively. Then,
+        \begin{equation*} 
+            1 \le g \le m \le n.
+        \end{equation*}
+    \end{thm}
+\end{frame}
+\begin{frame}{Diagonalisability}
+    \begin{thm}
+        Let $\mathbf{v}_{1}, \ldots, \mathbf{v}_{k}$ be eigenvectors of $A$ corresponding to distinct eigenvalues. \pause Then, they are linearly independent.
+    \end{thm}
+
+    \begin{thm}
+        Let $A$ be an $n \times n$ matrix over $\mathbb{K}$. TFAE: \pause
+        \begin{enumerate}[<+->]
+            \item There exists a basis $\{\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\}$ of $\mathbb{K}^{n}$ consisting of eigenvectors of $A$.
+            \item There exists an invertible matrix $P \in \mathbb{K}^{n \times n}$ such that $P^{-1} A P$ is a diagonal matrix.
+        \end{enumerate}
+    \end{thm} \pause
+
+    If $A$ satisfies either (and hence, both) condition, then $A$ is said to be \deff{diagonalisable over $\mathbb{K}$}.
+\end{frame}
+\begin{frame}{Criteria for diagonalisability}
+    Let $A \in \mathbb{K}^{n \times n}$ be a square matrix, and let $\lambda_{1}, \ldots, \lambda_{k} \in \mathbb{K}$ be the distinct eigenvalues of $A$. \newline \pause
+    Let $g_{i}$ and $m_{i}$ denote the geometric and algebraic multiplicities of $\lambda_{i}$. \pause 
+    
+    $A$ is diagonalisable \underline{over $\mathbb{K}$} iff $\boxed{\sum g_{i} = n}$. \pause
+
+    Note that if $\mathbb{K} = \mathbb{C}$, then $\sum m_{i} = n$ is always true \pause and the above condition just says that we must have $g_{i} = m_{i}$ for all $i$. \pause
+
+    If $\mathbb{K} = \mathbb{R}$, then $\sum m_{i} < n$ is possible \pause and in that case, $A$ is automatically not diagonalisable \underline{over $\mathbb{R}$}. \pause However, $A$ may still be diagonalisable over $\mathbb{C}$. \pause
+
+    Example: $\begin{bmatrix}
+        0 & -1 \\
+        1 & 0
+    \end{bmatrix}$ is diagonalisable over $\mathbb{C}$ but not over $\mathbb{R}$.
+\end{frame}
+\begin{frame}{The \texorpdfstring{$P$}{P} and \texorpdfstring{$D$}{D}}
+    Suppose that $A$ is diagonalisable over $\mathbb{K}$ and that we have found out the distinct eigenvalues $\lambda_{1}, \ldots, \lambda_{k}$. \pause
+
+    For each $\lambda_{i}$, we can find a basis for the nullspace of $A - \lambda_{i} \mathbf{I}$ using REF. \pause Find a basis for each $\mathcal{N}(A - \lambda_{i} I)$ and put it all in a list: $\{\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\}$. \pause (Why do we get $n$ vectors?) \pause
+
+    Now, define the matrix $P = \begin{bmatrix}
+        \mathbf{v}_{1} & \cdots & \mathbf{v}_{n}
+    \end{bmatrix} \in \mathbb{K}^{n \times n}$. \pause Note that $P$ is invertible. \pause Moreover,
+    \begin{equation*} 
+        D \vcentcolon= P^{-1} A P
+    \end{equation*}
+    is a diagonal matrix. \pause The $i$-th diagonal entry will be the eigenvalue corresponding to $\mathbf{v}_{i}$. \pause Each eigenvalue will appear in $D$ according to its multiplicity. \pause (Which multiplicity?)
+\end{frame}
+
+\section{Normal matrices and Spectral Theorems}
+\begin{frame}{Adjoint}
+    Given a complex matrix $A$, we denote its conjugate transpose by $A^{\ast}$. This is called the adjoint of $A$. \pause
+
+    $A \in \mathbb{C}^{n \times n}$ is said to be \underline{\phantom{hello}} if \underline{\phantom{hello}}: 
+    \begin{enumerate}[<+->]
+        \item \deff{normal}; $AA^{\ast} = A^{\ast} A$,
+        \item \deff{Hermitian}; $A^{\ast} = A$,
+        \item \deff{skew-Hermitian}; $A^{\ast} = -A$,
+        \item \deff{unitary}; $AA^{\ast} = \mathbf{I}$,
+        \item \deff{orthogonal}; $A$ is unitary and real.
+    \end{enumerate} \pause
+    For a unitary matrix, we also have $A^{\ast}A = \mathbf{I}$. \pause Note that all matrices above are normal. \pause Also note that unitary matrices are invertible. \pause
+
+    Also recall that he standard inner product on $\mathbb{K}^{n}$ is given by $\langle \mathbf{v}, \mathbf{w}\rangle \vcentcolon= \mathbf{w}^{\ast} \mathbf{v}$. \pause This is what we shall refer to from now on.
+\end{frame}
+\begin{frame}{Some remarks}
+    Let $A \in \mathbb{C}^{n \times n}$ be a matrix. TFAE: \pause
+    \begin{enumerate}[<+->]
+        \item $A$ is unitary.
+        \item The rows of $A$ are orthonormal.
+        \item The columns of $A$ are orthonormal.
+    \end{enumerate} \pause
+
+    Also note that a diagonal matrix is Hermitian iff it is real. \newline
+    Similarly, a diagonal matrix is skew-Hermitian iff it is purely imaginary.
+\end{frame}
+\begin{frame}{Spectral theorem}
+    \begin{thm}
+        Let $A$ be normal, and $\mathbf{v}_{1}, \ldots, \mathbf{v}_{k}$ be eigenvectors of $A$ corresponding to distinct eigenvalues. \pause Then, they are orthogonal.
+    \end{thm} \pause
+
+    \begin{thm}[Spectral Theorem]
+        Let $A \in \mathbb{C}^{n \times n}$ be a normal matrix. Then, $A$ is \deff{unitarily diagonalisable}, \pause i.e., there exists a unitary matrix $U \in \mathbb{C}^{n \times n}$ such that $U^{-1} A U$ is diagonal. \pause
+
+        Equivalently, there is an basis of $\mathbb{C}^{n}$ consisting of orthonormal eigenvectors.
+    \end{thm} \pause
+
+    Note that $U^{-1} = U^{\ast}$ above, since $P$ is unitary. \pause Note that even if $A$ is a real normal matrix, we cannot guarantee that $U$ can be chosen to be normal. \pause Indeed, if $A$ has a nonreal eigenvalue in $\mathbb{C}$, then $P$ cannot be chosen real. \pause
+
+    The converse of the above is true as well: if $A$ is unitarily diagonalisable (or has an orthonormal eigenbasis), then $A$ is normal.
+\end{frame}
+\begin{frame}{Nature of eigenvalues}
+    Let $A$ be a normal matrix, and $\lambda \in \mathbb{C}$ be an eigenvalue of $A$. \pause We have the following table giving us more information about the nature of $A$.
+
+    \begin{center}
+        \begin{tabular}{|l|l|}
+            \hline
+            Nature of $A$ & Nature of $\lambda$ \\
+            \hline
+            Hermitian & $\lambda \in \mathbb{R}$ \\ 
+            Skew-Hermitian & $\lambda \in \iota \mathbb{R}$ \\
+            Unitary & $\md{\lambda} = 1$ \\
+            \hline
+        \end{tabular}
+    \end{center} \pause
+
+    In particular, we have a spectral theorem for real symmetric matrices. \pause
+
+    \begin{thm}
+        Let $A \in \mathbb{R}^{n \times n}$ be symmetric. Then, there exists an orthogonal matrix $O \in \mathbb{R}^{n \times n}$ such that $O^{\mathsf{T}} A O$ is diagonal.
+    \end{thm}
+\end{frame}
+% \begin{frame}{}
+%     \begin{tabular}{|l|l|l|l|}
+%         & \deff{normal} & & $AA^{\ast} = A^{\ast} A$ \\
+%         $A$ is said & \deff{Hermitian} &  & $A^{\ast} = A$ \\ 
+%         to be & \deff{skew-Hermitian} & if & $A^{\ast} = -A$ \\
+%         & \deff{unitary} & & $AA^{\ast} = \mathbf{I}$
+%     \end{tabular}
+% \end{frame}
+
+\end{document}
