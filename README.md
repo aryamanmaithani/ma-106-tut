@@ -1,2 +1,2 @@
 # ma-106-tut
-Resources for MA 106
+Check [this](https://aryamanmaithani.github.io/tuts/ma-106/) for a better index!
