@@ -7,11 +7,11 @@
 \usepackage{soul}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{centernot}
+\usepackage{commands}
 \usepackage{parskip}
 
 \setlength\parindent{0pt}
 \let\emptyset\varnothing
-\newcommand{\rank}{\operatorname{rank}}
 %\renewcommand{\span}{\operatorname{span}}
 
 \usepackage{xcolor}
@@ -60,7 +60,7 @@
 % $\mathcal{N}(A)$ denotes the null-space of the matrix $A.$\\
 % If $f:X\to Y$ is a function and $S \subset X,$ we define $f(S) := \{y \in Y : \exists s \in S(f(s) = y)\} = \{f(s) : s \in S\}.$
 
-If nothing is mentioned, assume that similarity and eigenvalues/eigenvectors are being considered over $\mathbb{C}$. 
+If nothing is mentioned, assume that similarity and eigenvalues/eigenvectors are being considered over $\mathbb{C}$. The characteristic polynomial of a square matrix $A$ is defined as $p_{A}(t) = \det(A - tI)$.
 
 \begin{enumerate}[leftmargin=*]
 	\item Let $A$ be a $2 \times 2$ real matrix with $\det(A) < 0$. Then,
@@ -158,7 +158,7 @@ If nothing is mentioned, assume that similarity and eigenvalues/eigenvectors are
 	 		0 & 0 & 2 & 4 \\
 	 		0 & 0 & 0 & 2 \\
 	 	\end{bmatrix}
-	 	\quad\text{and}\quad 
+	 	\andd
 	 	B = \begin{bmatrix}
 	 		2 & 4 & 0 & 0 \\
 	 		0 & 2 & 3 & 0 \\
@@ -302,6 +302,9 @@ If nothing is mentioned, assume that similarity and eigenvalues/eigenvectors are
 	 Show that if $A \mathbf{x} = \lambda \mathbf{x}$, then $A^{\ast} \mathbf{x} = \overline{\lambda} \mathbf{x}$.
 	 %
 	 \item Give an example of a square matrix over $\mathbb{C}$ that is not diagonalisable.
+	 %
+	 \item Suppose $A \in \mathbb{R}^{3 \times 3}$ satisfies $A^{3} - 2A^{2} = A - 2I$ and has the property that $\det(A) < 0$ and $\trace(A) > 2$. \newline
+	 Find the characteristic polynomial $p(t) = \det(A - tI)$.
 \end{enumerate}
 
 \end{document}
