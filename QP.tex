@@ -1,0 +1,307 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{centernot}
+\usepackage{parskip}
+
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
+\newcommand{\rank}{\operatorname{rank}}
+%\renewcommand{\span}{\operatorname{span}}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+% \usepackage{pagecolor}
+% \pagecolor{mybgcolor}
+% \color{white}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% \usepackage{titlesec}
+% \titleformat{\section}[block]
+%   {\normalfont\scshape}{\S\thesection}{0.25cm}{\large}
+
+% \usepackage{geometry}
+% \geometry{
+% 	a4paper,
+% 	total={170mm,257mm},
+% 	left=20mm,
+% 	top=20mm,
+% }
+
+\title{MA 106 Endsem\footnote{Of course, this is not the actual endsem paper.}}
+\author{Aryaman Maithani}
+\date{Spring 2022}
+
+\begin{document}
+\maketitle
+% \tableofcontents
+% \hrulefill
+% \setcounter{section}{-1}
+% \section{Notation}
+
+% $\mathbb{N} = \{1,\; 2,\; \ldots\}$ denotes the set of natural numbers.\\
+% $\mathbb{Z} = \mathbb{N} \cup \{0\} \cup \{-n : n\in\mathbb{N}\}$ denotes the set of integers.\\
+% $\mathbb{Q}$ denotes the set of rational numbers.\\
+% $\mathbb{R}$ denotes the set of real numbers.\\
+% The existence of all the above sets will be assumed.\\
+% $M_n(\mathbb{R})$ denotes the set of all $n\times n$ matrices with real entries.\\
+% $M_n(\mathbb{C})$ denotes the set of all $n\times n$ matrices with complex entries.\\
+% $M_n(\mathbb{F})$ denotes the set of all $n\times n$ matrices with entries from an arbitrary field $\mathbb{F}.$ If you're not familiar with fields, you may assume $\mathbb{F} = \mathbb{R}$ or $\mathbb{C}.$\\
+% Whenever either of the above three sets is written, it will be assumed that $n \in \mathbb{N}.$\\~\\
+% $A \subset B$ will be written to denote that $A$ is a(n improper) subset of $B.$ In particular, $\{1\} \subset \{1\}$ is a true statement. So is $\{1\} \subset \{1, 2\}.$\\
+% $A \subsetneq B$ will be written to denote that $A$ is a proper subset of $B.$ In particular, $\{1\} \subsetneq \{1\}$ is not a true statement. However, $\{1\} \subsetneq \{1, 2\}$ is.\\
+% $\mathcal{N}(A)$ denotes the null-space of the matrix $A.$\\
+% If $f:X\to Y$ is a function and $S \subset X,$ we define $f(S) := \{y \in Y : \exists s \in S(f(s) = y)\} = \{f(s) : s \in S\}.$
+
+If nothing is mentioned, assume that similarity and eigenvalues/eigenvectors are being considered over $\mathbb{C}$. 
+
+\begin{enumerate}[leftmargin=*]
+	\item Let $A$ be a $2 \times 2$ real matrix with $\det(A) < 0$. Then,
+	\begin{enumerate}
+		\item $A$ is diagonalisable over $\mathbb{R}$.
+		\item $A$ is not diagonalisable over $\mathbb{R}$.
+		\item The given information is not sufficient to conclude.
+	\end{enumerate}
+	%
+	\item Let $A$ and $B$ be $2 \times 2$ matrices with same eigenvalue(s) with the same geometric and algebraic multiplicities. \newline
+	True/False: $A$ and $B$ are similar.
+	%
+	\item Let $A$ be a nonzero square matrix such that $A^{k} = O$ for some $k \ge 2$. Show that $A$ is not diagonalisable.
+	%
+	\item Let $A$ be a $9 \times 7$ matrix and $B$ be a $4 \times 3$ matrix. \newline
+	Show that there exists a nonzero $7 \times 4$ matrix $X$ such that $AXB = O$.
+	%
+	\item Let $A$ and $B$ be $n \times n$ matrices. Consider the following statements. \newline
+	(S1) $A$ is similar to $B$. \newline
+	(S2) $A$ and $B$ have the same characteristic polynomial. \newline
+	(S3) $\det(A) = \det(B)$. 
+
+	Pick the correct options.
+	\begin{enumerate}
+	 	\item (S1) $\Rightarrow$ (S2)
+	 	\item (S2) $\Rightarrow$ (S3)
+	 	\item (S3) $\Rightarrow$ (S1)
+	 	\item (S1) $\Leftarrow$ (S2)
+	 	\item (S2) $\Leftarrow$ (S3)
+	 	\item (S3) $\Leftarrow$ (S1)
+	 \end{enumerate} 
+	 %
+	 \item Let $A$ and $B$ be square matrices with the same characteristic polynomial. Suppose that for each eigenvalue, the geometric and algebraic multiplicities are the same for $A$ and $B$. \newline
+	 True/False: $A$ and $B$ are similar.
+	 %
+	 \item Let $A$ be a $3 \times 3$ matrix with eigenvectors $\mathbf{u}$, $\mathbf{v}$, $\mathbf{w}$ corresponding to eigenvalues $0$, $1$, $2$ respectively. \newline
+	 Show that $A \mathbf{x} = \mathbf{u}$ has no solution. 
+	 %
+	 \item Let $A$ be a solved Sudoku interpreted as a $9 \times 9$ real matrix. Let $p(t)$ be the characteristic polynomial of $A$. Show that $p(45) = 0$.
+	 %
+	 \item Let $A$ be an $n \times n$ polynomial with characteristic polynomial $(-1)^{n}(t - 1)(t - 2) \cdots (t - n)$. Show that
+	 \begin{equation*} 
+	 	A \mathbf{x} = 
+	 	\begin{bmatrix}
+	 		1 \\
+	 		4 \\
+	 		\vdots \\
+	 		n^{2}
+	 	\end{bmatrix}
+	 \end{equation*}
+	 has a solution.
+	 %
+	 \item Let $A$ and $B$ be $3 \times 3$ polynomials with characteristic polynomial $-t^{3} + 6t^{2} - 11t + 6$. Are $A$ and $B$ necessarily similar?
+	 %
+	 \item Let $A$ and $B$ be $3 \times 3$ matrices with characteristic polynomial $-t(t - 1)^{2}$. Are $A$ and $B$ necessarily similar?
+	 %
+	 \item Let $A$ be an $m \times n$ real matrix. Show that $\mathcal{N}(A^{\mathsf{T}} A) = \mathcal{N}(A)$.
+	 %
+	 \item Given $A = \begin{bmatrix}
+	 	6.5 & -2.5 & 2.5 \\
+	 	-2.5 & 6.5 & -2.5 \\
+	 	0 & 0 & 4 \\
+	 \end{bmatrix}$, find a matrix $B$ such that $B^{2} = A$.
+	 %
+	 \item Let $\lambda_{1}, \ldots, \lambda_{n} \in \mathbb{C}$. Prove that
+	 \begin{equation*} 
+	 	\det 
+	 	\begin{bmatrix}
+	 		1 & 1 & \cdots & 1 \\
+	 		\lambda_{1} & \lambda_{2} & \cdots & \lambda_{n} \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		\lambda_{1}^{n - 1} & \lambda_{2}^{n - 1} & \cdots & \lambda_{n}^{n - 1}
+	 	\end{bmatrix} = \prod_{1 \le i < j \le n} (\lambda_{j} - \lambda_{i}).
+	 \end{equation*}
+	 %
+	 \item Let $A$ be an $n \times n$ matrix satisfying $A^{2} = A$. Suppose that $A$ is neither the zero matrix nor the identity matrix. \newline
+	 Choose the correct option(s).
+	 \begin{enumerate}
+	 	\item $A$ must be invertible.
+	 	\item $A$ cannot be invertible.
+	 	\item The only possible eigenvalues of $A$ are $0$ and $1$.
+	 	\item The null space and column space of $A$ have a nonzero vector in common.
+	 \end{enumerate}
+	 %
+	 \item Show that if $A$ is an $n \times n$ matrix satisfying $A^{2} = A$, then $A$ is diagonalisable. \newline
+	 Conclude that if $A^{2} = cA$ for some $c \neq 0$, then too $A$ is diagonalisable. 
+	 %
+	 \item Let $A$ be a matrix such that $A^{k} = O$ for some $k \ge 1$. Show that $I - A$ is invertible.
+	 %
+	 \item Let $A$ and $B$ be $4 \times 4$ matrices defined by
+	 \begin{equation*} 
+	 	A = \begin{bmatrix}
+	 		2 & 3 & 0 & 0 \\
+	 		0 & 2 & 0 & 0 \\
+	 		0 & 0 & 2 & 4 \\
+	 		0 & 0 & 0 & 2 \\
+	 	\end{bmatrix}
+	 	\quad\text{and}\quad 
+	 	B = \begin{bmatrix}
+	 		2 & 4 & 0 & 0 \\
+	 		0 & 2 & 3 & 0 \\
+	 		0 & 0 & 2 & 0 \\
+	 		0 & 0 & 0 & 2 \\
+	 	\end{bmatrix}.
+	 \end{equation*}
+	 Mark the correct option(s).
+	 \begin{enumerate}
+	 	\item Both $A$ and $B$ have the same characteristic polynomial.
+	 	\item Both $A$ and $B$ have the same eigenvalues and their geometric multiplicities are also the same.
+	 	\item Both $A$ and $B$ have the same eigenvalues and their algebraic multiplicities are also the same.
+	 	\item $A$ and $B$ are similar.
+	 \end{enumerate}
+	 %
+	 \item Consider
+	 \begin{equation*} 
+	 	A = 
+	 	\begin{bmatrix}
+	 		2 & 0 & 0 & 2 \\
+	 		0 & 0 & 1 & 2 \\
+	 		3 & 0 & 0 & 3 \\
+	 		0 & -1 & 0 & 2 \\
+	 	\end{bmatrix},
+	 	\, 
+	 	\mathbf{u} = 
+	 	\begin{bmatrix}
+	 		2 \\
+	 		1 \\
+	 		3 \\
+	 		1 \\
+	 	\end{bmatrix}, 
+	 	\, \text{and} \, 
+	 	\mathbf{v} = 
+	 	\begin{bmatrix}
+	 		3 \\
+	 		1 \\
+	 		2 \\
+	 		1 \\
+	 	\end{bmatrix}.
+	 \end{equation*}
+	 Choose the correct option(s):
+	 \begin{enumerate}
+	 	\item $A \mathbf{x} = \mathbf{u}$ has a solution.
+	 	\item $\mathbf{v}$ is in the column space of $A$.
+	 	\item None of the above.
+	 \end{enumerate}
+	 %
+	 \item Find the value(s) of $k$ for which the system
+	 \begin{align*} 
+	 	y + 3kz &= 0 \\
+	 	x + 2y + 6z &= 2 \\
+	 	kx + 2ky + 12z &= -4
+	 \end{align*}
+	 has no solution.
+	 %
+	 \item Let $A$ be an $m \times n$ matrix. Let $\mathcal{N}(A)$, $\mathcal{R}(A)$, and $\mathcal{C}(A)$ denote the null space, row space, and column space of $A$, respectively. Pick the correct option(s).
+	 \begin{enumerate}
+	 	\item $\dim(\mathcal{N}(A)) = \dim(\mathcal{R}(A))$.
+	 	\item $\dim(\mathcal{N}(A)) + \dim(\mathcal{R}(A)) = n$.
+	 	\item $\dim(\mathcal{N}(A)) + \dim(\mathcal{C}(A)) = n$.
+	 	\item $\mathcal{N}(A)$ and $\mathcal{R}(A)$ are orthogonal.
+	 	\item $\mathcal{N}(A)$ and $\mathcal{C}(A)$ are orthogonal.
+	 \end{enumerate}
+	 Recall that subspaces $V, W \subset \mathbb{R}^{n}$ are said to be orthogonal if $\langle v, w \rangle = 0$ for all $v \in V$ and all $w \in W$.
+	 %
+	 \item Let $A$ be a self-adjoint matrix. Show that if $\langle A \mathbf{x}, \mathbf{x}\rangle = 0$ for all $\mathbf{x} \in \mathbb{C}^{n}$, then $A = O$.
+	 %
+	 \item Show that if $\|A \mathbf{x}\| = \|A^{\ast} \mathbf{x}\|$ for all $\mathbf{x} \in \mathbb{C}^{n}$, then $A$ is a normal matrix.
+	 %
+	 \item Show that if $\|A \mathbf{x}\| = \|\mathbf{x}\|$ for all $\mathbf{x} \in \mathbb{C}^{n}$, then $A$ is a unitary matrix.
+	 %
+	 \item Which of the following matrices are diagonalisable?
+
+	 \begin{equation*} 
+	 	\begin{bmatrix}
+	 		5 & -1 \\
+	 		1 & 3
+	 	\end{bmatrix},\, 
+	 	\begin{bmatrix}
+	 		3 & 2 & 1 & 0 \\
+	 		0 & 1 & 0 & 1 \\
+	 		0 & 2 & -1 & 0 \\
+	 		0 & 0 & 0 & 1/2 \\
+	 	\end{bmatrix},\,
+	 	\begin{bmatrix}
+	 		2 & 1 & 0 \\
+	 		0 & 2 & 1 \\ 
+	 		0 & 0 & 2 \\
+	 	\end{bmatrix}.
+	 \end{equation*}
+	 %
+	 \item Find necessary and sufficient conditions on $a, b, c$ for the following matrix to be diagonalisable:
+
+	 \begin{equation*} 
+	 	\begin{bmatrix}
+	 		2 & a & b \\
+	 		0 & 1 & c \\
+	 		0 & 0 & 2 \\
+	 	\end{bmatrix}.
+	 \end{equation*}
+	 %
+	 \item Let $\lambda \in \mathbb{C}$. Show that $\lambda$ is an eigenvalue of $A$ iff $\overline{\lambda}$ is an eigenvalue of $A^{\ast}$. 
+	 %
+	 \item Use Gram-Schmidt to orthonormalise the ordered subset
+	 \begin{equation*} 
+	 	(\begin{bmatrix}
+	 		1 & -1 & 2 & 0
+	 	\end{bmatrix}^{\mathsf{T}},
+	 	\begin{bmatrix}
+	 		1 & 1 & 2 & 0
+	 	\end{bmatrix}^{\mathsf{T}},
+	 	\begin{bmatrix}
+	 		3 & 0 & 0 & 1
+	 	\end{bmatrix})^{\mathsf{T}}
+	 \end{equation*}
+	 and obtain an ordered orthonormal set $(\mathbf{v}_{1}, \mathbf{v}_{2}, \mathbf{v}_{3})$. Also, find $\mathbf{v}_{4}$ such that $\{\mathbf{v}_{1}, \mathbf{v}_{2}, \mathbf{v}_{3}, \mathbf{v}_{4}\}$ is an orthonormal basis for $\mathbb{R}^{4}$. \newline
+	 Express $\begin{bmatrix}
+	 		1 & -1 & 1 & -1
+	 	\end{bmatrix}^{\mathsf{T}}$ as a linear combination of these four basis vectors.
+	 %
+	 \item Write down the symmetric matrix $A$ such that the quadric
+	 \begin{equation*} 
+	 	7x^{2} + 7y^{2} - 2z^{2} + 20yz - 20zx - 2xy = 36
+	 \end{equation*}
+	 can be expressed as
+	 \begin{equation*} 
+	 	\begin{bmatrix}
+	 		x & y & z
+	 	\end{bmatrix} A 
+	 	\begin{bmatrix}
+	 		x \\
+	 		y \\
+	 		z
+	 	\end{bmatrix} = 36.
+	 \end{equation*}
+	 Find a matrix $U$ such that $U^{\mathsf{T}}AU$ is diagonal.
+	 %
+	 \item Let $A$ be an $n \times n$ normal matrix and $\lambda \in \mathbb{C}$. \newline
+	 Show that $A - \lambda I$ is a normal matrix. \newline
+	 Show that if $A \mathbf{x} = \lambda \mathbf{x}$, then $A^{\ast} \mathbf{x} = \overline{\lambda} \mathbf{x}$.
+	 %
+	 \item Give an example of a square matrix over $\mathbb{C}$ that is not diagonalisable.
+\end{enumerate}
+
+\end{document}
