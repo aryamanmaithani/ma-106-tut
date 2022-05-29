@@ -352,15 +352,94 @@
     Let $A \in \mathbb{K}^{m \times n}$ and $\mathbf{b} \in \mathbb{K}^{m}$. Consider the system
     \begin{equation} \label{eq:01} \tag{$\ast$}
         A \mathbf{x} = \mathbf{b}.
-    \end{equation}
+    \end{equation} \pause
 
-    \emph{Suppose} that (\ref{eq:01}) has a particular solution $\mathbf{x}_{0}$. \emph{Then}, the complete set of solutions of (\ref{eq:01}) is $\mathbf{x}_{0} + \mathcal{N}(A)$. \pause
+    \emph{Suppose} that (\ref{eq:01}) has a particular solution $\mathbf{x}_{0}$. \pause \emph{Then}, the complete set of solutions of (\ref{eq:01}) is $\mathbf{x}_{0} + \mathcal{N}(A)$. \pause
 
     Moreover, note that (\ref{eq:01}) has a solution iff $\mathbf{b}$ is in the column space of $A$. \pause
 
     True/False: Suppose $A \mathbf{x} = \mathbf{0}$ has infinitely many solutions, and fix $\mathbf{b} \in \mathbb{K}^{m}$. Then, $A \mathbf{x} = \mathbf{b}$ also has infinitely many solutions. \pause
 
     What if ``infinitely many'' is replaced with ``unique''?
+\end{frame}
+\begin{frame}{Finding a basis for the null space}
+    Let us discuss how to find a basis for the null space of an $m \times n$ matrix $A$. \pause Since performing EROs does not affect the solution space, we may assume that we have converted $A$ to REF. \pause As discussed, we can back-substitute and get the pivotal variables in terms of the free variables. \pause Let us say that $x_{i_{1}}, \ldots, x_{i_{k}}$ are the free variables. \pause
+
+    We get our first basis vector by putting $x_{i_{1}} = 1$ and the other free variables as $0$. \pause We can now solve to get the explicit values of the pivotal variables as well. \pause This is our first basis vector. \pause
+
+    After this, we put $x_{i_{2}} = 1$ and other free variables as $0$. \pause Continue in the obvious manner.
+\end{frame}
+\begin{frame}{An example}
+    Suppose that we have
+    \begin{equation*} 
+        A = 
+        \begin{bmatrix}
+            \boxed{1} & 3 & 1 & 1 \\
+            0 & 0 & \boxed{2} & 4
+        \end{bmatrix}.
+    \end{equation*} \pause
+    Note that we wish to solve $A \mathbf{x} = \mathbf{0}$ to get the null space. \pause Thus, the equations obtained are
+    \begin{equation*} 
+        2x_{3} + 4x_{4} = 0 \andd x_{1} + 3x_{2} + x_{3} + x_{4} = 0.
+    \end{equation*} \pause
+    The free variables are \pause $x_{2}$ and $x_{4}$. \pause
+
+    First solution: $x_{2} = 1$ and $x_{4} = 0$: \pause We get $x_{3} = 0$ and $x_{1} = -3$. \pause
+
+    Second solution: $x_{2} = 0$ and $x_{4} = 1$: \pause We get $x_{3} = -2$ and $x_{1} = 1$. \pause
+
+    Thus, we get a basis as $\{\begin{bmatrix}
+        -3 & 1 & 0 & 0
+    \end{bmatrix}^{\TT}, \begin{bmatrix}
+        1 & 0 & -2 & 1
+    \end{bmatrix}^{\TT}\}$.
+\end{frame}
+\begin{frame}{An example (continued)}
+    Suppose that we were asked to find the general solution set of
+    \begin{equation*} 
+        \begin{bmatrix}
+            \boxed{1} & 3 & 1 & 1 \\
+            0 & 0 & \boxed{2} & 4
+        \end{bmatrix} \mathbf{x} 
+        =
+        \begin{bmatrix}
+            1 \\
+            4
+        \end{bmatrix}.
+    \end{equation*} \pause
+
+    Then, using back-substitution, it is easy to find one particular solution \pause (you can put both free variables as $0$ to make life easy). \pause This gives us a particular solution as
+    \begin{equation*} 
+        \mathbf{x}_{0} = 
+        \begin{bmatrix}
+            -1 &
+            0 &
+            2 &
+            0
+        \end{bmatrix}^{\TT}.
+    \end{equation*} \pause
+    The general solution now is $\mathbf{x}_{0} + \mathcal{N}(A)$. \pause We had already found a basis earlier. \pause Thus, the complete \underline{set} of solutions is given by
+    \begin{equation*} 
+        \left\{\begin{bmatrix}
+            -1 \\
+            0 \\
+            2 \\
+            0
+        \end{bmatrix} +
+        x_{2} \begin{bmatrix}
+        -3 \\
+        1 \\
+        0 \\
+        0
+        \end{bmatrix} + 
+        x_{4} \begin{bmatrix}
+            1 \\ 
+            0 \\ 
+            -2 \\ 
+            1
+        \end{bmatrix} : x_{2}, x_{4} \in \mathbb{R}
+        \right\}.
+    \end{equation*} 
 \end{frame}
 \begin{frame}{Determinants}
     We know what the determinant of a matrix is. Furthermore, we know its basic properties: it is multilinear, alternating, and $\det(\mathbf{I}) = 1$. \pause Moreover, $\det(AB) = \det(A)\det(B)$ and $\det(A) = \det(A^{\TT})$. \pause
@@ -521,7 +600,7 @@
 \begin{frame}{The \texorpdfstring{$P$}{P} and \texorpdfstring{$D$}{D}}
     Suppose that $A$ is diagonalisable over $\mathbb{K}$ and that we have found out the distinct eigenvalues $\lambda_{1}, \ldots, \lambda_{k}$. \pause
 
-    For each $\lambda_{i}$, we can find a basis for the nullspace of $A - \lambda_{i} \mathbf{I}$ using REF. \pause Find a basis for each $\mathcal{N}(A - \lambda_{i} I)$ and put it all in a list: $\{\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\}$. \pause (Why do we get $n$ vectors?) \pause
+    For each $\lambda_{i}$, we can find a basis for the null space of $A - \lambda_{i} \mathbf{I}$ using REF. \pause Find a basis for each $\mathcal{N}(A - \lambda_{i} I)$ and put it all in a list: $\{\mathbf{v}_{1}, \ldots, \mathbf{v}_{n}\}$. \pause (Why do we get $n$ vectors?) \pause
 
     Now, define the matrix $P = \begin{bmatrix}
         \mathbf{v}_{1} & \cdots & \mathbf{v}_{n}
