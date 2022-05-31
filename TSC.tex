@@ -173,10 +173,10 @@
     $\begin{bmatrix}
         \boxed{3} & 1 & 0 & 0 \\
         0 & \boxed{1} & 1 & 1
-    \end{bmatrix}$ \pause \textbf{is} in REF even though the first row has more zeroes \underline{in total}.
+    \end{bmatrix}$ \pause \textbf{is} in REF even though the first row has more zeroes \underline{in total}. \pause
 
     \begin{defn}
-        A matrix in REF is said to be in \deff{reduced REF (RREF)} if further: \pause (i) all pivots are 1, \pause and (ii) the entries above each pivot is $0$.
+        A matrix in REF is said to be in \deff{reduced REF (RREF)} if further: \pause (i) all pivots are 1, \pause and (ii) the entries above each pivot are $0$.
     \end{defn} \pause
 
     The matrix above is not in RREF. \pause It violates \emph{both} the conditions.
@@ -185,7 +185,7 @@
     \begin{thm}
         Given any $m \times n$ matrix $A$, one can perform elementary row operations on $A$ to convert it into RREF. \pause
 
-        Equivalently, there exists elementary roe matrices $E_{1}, \ldots, E_{N}$ such that
+        Equivalently, there exist elementary row matrices $E_{1}, \ldots, E_{N}$ such that
         \begin{equation*} 
             E_{N} \cdots E_{1} A
         \end{equation*}
@@ -235,7 +235,7 @@
         \end{enumerate}
     \end{defn} \pause
 
-    One can replace $\mathbb{R}$ above with $\mathbb{C}$ everywhere to get the notion of a \deff{complex vector subspace}. \pause To consider both at once, we shall use the symbol $\mathbb{K}$ -- which could stand for either $\mathbb{R}$ or $\mathbb{C}$.
+    One can replace $\mathbb{R}$ above with $\mathbb{C}$ everywhere to get the notion of a \deff{complex vector subspace}. \pause To consider both at once, we shall use the symbol $\mathbb{K}$ -- which could stand for either $\mathbb{R}$ or $\mathbb{C}$. \pause
 
     From this point on, $V$ will always denote a vector subspace of $\mathbb{K}^{n}$ (for some $n$). \pause
 
@@ -258,7 +258,6 @@
         \begin{equation*} 
             a_{1} \mathbf{v}_{1} + \cdots + a_{k} \mathbf{v}_{k} = \mathbf{0}.
         \end{equation*} \pause
-
         Else, they are said to be \deff{linearly independent}.
     \end{defn} \pause
 
@@ -353,7 +352,6 @@
     \begin{equation} \label{eq:01} \tag{$\ast$}
         A \mathbf{x} = \mathbf{b}.
     \end{equation} \pause
-
     \emph{Suppose} that (\ref{eq:01}) has a particular solution $\mathbf{x}_{0}$. \pause \emph{Then}, the complete set of solutions of (\ref{eq:01}) is $\mathbf{x}_{0} + \mathcal{N}(A)$. \pause
 
     Moreover, note that (\ref{eq:01}) has a solution iff $\mathbf{b}$ is in the column space of $A$. \pause
@@ -558,7 +556,7 @@
         $m$ is called the \deff{algebraic multiplicity} of $\lambda$. \pause
 
         The \deff{geometric multiplicity} of $\lambda$ is defined as $\nullity(A - \lambda I)$.
-    \end{defn}
+    \end{defn} \pause
 
     \begin{thm}
         Let $\lambda$ be an eigenvalue of an $n \times n$ matrix $A$. Let $g$ and $m$ denote the geometric and algebraic multiplicities of $\lambda$ respectively. Then,
@@ -570,7 +568,7 @@
 \begin{frame}{Diagonalisability}
     \begin{thm}
         Let $\mathbf{v}_{1}, \ldots, \mathbf{v}_{k}$ be eigenvectors of $A$ corresponding to distinct eigenvalues. \pause Then, they are linearly independent.
-    \end{thm}
+    \end{thm} \pause
 
     \begin{thm}
         Let $A$ be an $n \times n$ matrix over $\mathbb{K}$. TFAE: \pause
@@ -649,7 +647,7 @@
         Equivalently, there is an basis of $\mathbb{C}^{n}$ consisting of orthonormal eigenvectors.
     \end{thm} \pause
 
-    Note that $U^{-1} = U^{\ast}$ above, since $P$ is unitary. \pause Note that even if $A$ is a real normal matrix, we cannot guarantee that $U$ can be chosen to be normal. \pause Indeed, if $A$ has a nonreal eigenvalue in $\mathbb{C}$, then $P$ cannot be chosen real. \pause
+    Note that $U^{-1} = U^{\ast}$ above, since $U$ is unitary. \pause Note that even if $A$ is a real normal matrix, we cannot guarantee that $U$ can be chosen to be real. \pause Indeed, if $A$ has a nonreal eigenvalue in $\mathbb{C}$, then $U$ cannot be chosen real. \pause
 
     The converse of the above is true as well: if $A$ is unitarily diagonalisable (or has an orthonormal eigenbasis), then $A$ is normal.
 \end{frame}
